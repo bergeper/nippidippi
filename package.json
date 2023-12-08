@@ -25,6 +25,7 @@
     "@trpc/next": "^10.43.6",
     "@trpc/react-query": "^10.43.6",
     "@trpc/server": "^10.43.6",
+    "@vercel/postgres": "^0.5.1",
     "next": "^14.0.3",
     "next-auth": "^4.24.5",
     "react": "18.2.0",
@@ -43,8 +44,8 @@
     "@typescript-eslint/parser": "^6.11.0",
     "eslint": "^8.54.0",
     "prisma": "^5.6.0",
-    "uuid": "^9.0.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "uuid": "^9.0.0"
   },
   "ct3aMetadata": {
     "initVersion": "7.24.1"
