@@ -4,9 +4,9 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import Credentials from "next-auth/providers/credentials";
 
-import { env } from "~/env";
+// import { env } from "~/env";
 import { db } from "~/server/db";
 
 /**
@@ -16,10 +16,10 @@ import { db } from "~/server/db";
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
 declare module "next-auth" {
-  interface Session extends DefaultSession {
+  interface Session {
     user: {
       id: string;
-      // ...other properties
+      username: string;
       // role: UserRole;
     } & DefaultSession["user"];
   }
@@ -42,14 +42,41 @@ export const authOptions: NextAuthOptions = {
       user: {
         ...session.user,
         id: user.id,
+        username: user.name,
       },
     }),
   },
   adapter: PrismaAdapter(db),
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    // DiscordProvider({
+    //   clientId: env.DISCORD_CLIENT_ID,
+    //   clientSecret: env.DISCORD_CLIENT_SECRET,
+    // }),
+    Credentials({
+      name: "Credentials",
+      credentials: {
+        username: {
+          label: "Username",
+          type: "text",
+          placeholder: "Type you username...",
+        },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "Type your Password...",
+        },
+      },
+      async authorize(credentials) {
+        if (!credentials) throw Error("missing credentials");
+        const { username, password } = credentials;
+
+        const user = await db.user.findUnique({
+          where: { username: username },
+        });
+        if (!user || user.password !== password) return null;
+
+        return user;
+      },
     }),
     /**
      * ...add more providers here.
