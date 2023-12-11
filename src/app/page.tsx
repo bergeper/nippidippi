@@ -1,6 +1,5 @@
 import { getServerAuthSession } from "~/app/api/auth/[...nextauth]/options";
 // import { api } from "~/trpc/server";
-import { SignIn } from "./components/Auth/SignIn/SignIn";
 import { Button } from "@mui/material";
 
 export default async function Home() {
@@ -10,7 +9,7 @@ export default async function Home() {
   return (
     <>
       <Button>Sign In</Button>
-      <SignIn></SignIn>
+
       {session && <p>{session.id}</p>}
       <Button>Log out</Button>
     </>
