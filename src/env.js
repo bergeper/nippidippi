@@ -7,6 +7,7 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
+    // Dont need it since I got server on Vercel
     // POSTGRES_URL: z
     //   .string()
     //   .url()
