@@ -21,7 +21,6 @@ model User {
 model Chip {
   id String        @id @default(uuid())
   name String
-  info String
   flavor String
   combinations Combination[]
 }
