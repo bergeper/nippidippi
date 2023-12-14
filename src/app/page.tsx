@@ -3,8 +3,6 @@ import { getServerAuthSession } from "~/app/api/auth/[...nextauth]/options";
 import { Button } from "@mui/material";
 
 export default async function Home() {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-
   const session = await getServerAuthSession();
 
   return (
