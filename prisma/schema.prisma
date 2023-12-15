@@ -21,6 +21,7 @@ model User {
 model Chip {
   id String        @id @default(uuid())
   name String
+  imgUrl String
   flavor String
   combinations Combination[]
 }
@@ -28,6 +29,7 @@ model Chip {
 model Dip {
   id String        @id @default(uuid())
   name String
+  imgUrl String
   flavor String
   combinations Combination[]
 }
@@ -44,6 +46,7 @@ model Rating {
 
 model Combination {
   id String          @id @default(uuid())
+  comboNr String
   name String
   chipId String
   chip Chip     @relation(fields: [chipId], references: [id])
