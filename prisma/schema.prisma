@@ -46,7 +46,7 @@ model Rating {
 
 model Combination {
   id String          @id @default(uuid())
-  comboNr String
+  comboNr String  @unique
   name String
   chipId String
   chip Chip     @relation(fields: [chipId], references: [id])
