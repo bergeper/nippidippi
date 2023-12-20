@@ -1,21 +1,42 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { getServerSession, type NextAuthOptions } from "next-auth";
+import {
+  type DefaultSession,
+  getServerSession,
+  type NextAuthOptions,
+} from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
-import { db } from "~/server/db";
+import { db } from "src/server/db";
 
 declare module "next-auth" {
   interface Session {
-    id: string;
-    username: string;
+    user: {
+      id: string;
+      username: string;
+    } & DefaultSession["user"];
   }
 }
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session }) => ({
-      ...session,
-    }),
+    session: async ({ session }) => {
+      console.log("sessions 1: ", session.user.email);
+      if (!session.user?.email) return { ...session };
+      const dbUser = await db.user.findUnique({
+        where: { username: session.user.email },
+      });
+
+      console.log("sessions 2: ", session);
+      if (!dbUser) return { ...session };
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: dbUser.id,
+          username: dbUser.username,
+        },
+      };
+    },
   },
   adapter: PrismaAdapter(db),
   session: {
@@ -25,10 +46,10 @@ export const authOptions: NextAuthOptions = {
     Credentials({
       name: "Credentials",
       credentials: {
-        username: {
-          label: "Username",
-          type: "text",
-          placeholder: "Type you username...",
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "Type you Email...",
         },
         password: {
           label: "Password",
@@ -38,12 +59,12 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials) throw Error("missing credentials");
-        const { username, password } = credentials;
+        const { email, password } = credentials;
+        console.log(credentials);
 
         const user = await db.user.findUnique({
-          where: { username },
+          where: { email: email },
         });
-        console.log(user);
         if (!user || user.password !== password) return null;
 
         return user;
