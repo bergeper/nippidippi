@@ -15,7 +15,7 @@ const StyledTextField = styled(TextField)`
 const SignUpSchema = z.object({
   username: z
     .string()
-    .min(5, { message: "Username must contain atleast 5 characters" }),
+    .min(3, { message: "Username must contain atleast 5 characters" }),
   password: z
     .string()
     .min(6, { message: "Password must contain atleast 8 characters" }),
@@ -41,6 +41,10 @@ export const SignInForm = () => {
   const onSubmit = async (data: SignUpValues) => {
     try {
       console.log(data);
+      await signIn("credentials", {
+        username: data.username,
+        password: data.password,
+      });
     } catch (error) {
       console.log("error!", error);
     }
