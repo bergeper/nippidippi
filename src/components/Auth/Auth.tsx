@@ -35,7 +35,7 @@ export const Auth = () => {
         isModalOpen={isSignOutOpen}
         setIsSignOutOpen={setIsSignOutOpen}
       />
-      {session && <p>{JSON.stringify(session)}</p>}
+      {session && <p>{JSON.stringify(session.user)}</p>}
     </>
   );
 };

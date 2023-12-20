@@ -23,11 +23,11 @@ export const authOptions: NextAuthOptions = {
       console.log("sessions 1: ", session.user.email);
       if (!session.user?.email) return { ...session };
       const dbUser = await db.user.findUnique({
-        where: { username: session.user.email },
+        where: { email: session.user.email },
       });
 
-      console.log("sessions 2: ", session);
       if (!dbUser) return { ...session };
+      console.log("sessions 2: ", session);
       return {
         ...session,
         user: {
