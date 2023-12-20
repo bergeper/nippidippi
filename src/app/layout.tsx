@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import AuthSessionProvider from "./NextAuthProvider";
 
 export const metadata = {
   title: "NippiDippi",
@@ -16,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <TRPCReactProvider cookies={cookies().toString()}>
-          {children}
-        </TRPCReactProvider>
+        <AuthSessionProvider>
+          <TRPCReactProvider cookies={cookies().toString()}>
+            {children}
+          </TRPCReactProvider>
+        </AuthSessionProvider>
       </body>
     </html>
   );
