@@ -1,9 +1,12 @@
 import { Box } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { type Dispatch, type SetStateAction } from "react";
+import { SignUpForm } from "./SignUpForm";
 
 interface Props {
   isModalOpen: boolean;
+  setIsSignUpOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export const SignUpModal = (props: Props) => {
@@ -20,15 +23,16 @@ export const SignUpModal = (props: Props) => {
       <Box
         sx={{
           position: "relative" as const,
-          width: "66%",
-          height: "80%",
-          bgcolor: "background.paper",
+          width: "300px",
+          height: "400px",
+          bgcolor: "#1f1e1e",
           borderRadius: 2,
         }}
       >
         <CloseRoundedIcon
           sx={{
             position: "absolute",
+            color: "white",
             fontSize: 42,
             right: 10,
             top: 10,
@@ -37,7 +41,7 @@ export const SignUpModal = (props: Props) => {
             },
           }}
           color="disabled"
-          // onClick={() => props.setIsSignInOpen(false)}
+          onClick={() => props.setIsSignUpOpen(false)}
         />
         <Box
           sx={{
@@ -50,7 +54,7 @@ export const SignUpModal = (props: Props) => {
             gap: 4,
           }}
         >
-          SignFields here!
+          <SignUpForm />
         </Box>
       </Box>
     </Modal>
