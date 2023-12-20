@@ -1,9 +1,11 @@
 import { Box } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { type Dispatch, type SetStateAction } from "react";
 
 interface Props {
   isModalOpen: boolean;
+  setIsSignOutOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export const SignOutModal = (props: Props) => {
@@ -37,7 +39,7 @@ export const SignOutModal = (props: Props) => {
             },
           }}
           color="disabled"
-          // onClick={() => props.setIsSignInOpen(false)}
+          onClick={() => props.setIsSignOutOpen(false)}
         />
         <Box
           sx={{
