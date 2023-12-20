@@ -1,7 +1,8 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { type Dispatch, type SetStateAction } from "react";
+import { signOut } from "next-auth/react";
 
 interface Props {
   isModalOpen: boolean;
@@ -22,15 +23,16 @@ export const SignOutModal = (props: Props) => {
       <Box
         sx={{
           position: "relative" as const,
-          width: "66%",
-          height: "80%",
-          bgcolor: "background.paper",
+          width: "300px",
+          height: "400px",
+          backgroundColor: "#1f1e1e",
           borderRadius: 2,
         }}
       >
         <CloseRoundedIcon
           sx={{
             position: "absolute",
+            color: "white",
             fontSize: 42,
             right: 10,
             top: 10,
@@ -52,7 +54,18 @@ export const SignOutModal = (props: Props) => {
             gap: 4,
           }}
         >
-          SignFields here!
+          <Button
+            type="submit"
+            variant="outlined"
+            fullWidth
+            sx={{
+              height: 42,
+              padding: 3,
+            }}
+            onClick={() => signOut()}
+          >
+            LOG OUT
+          </Button>
         </Box>
       </Box>
     </Modal>
