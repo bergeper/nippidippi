@@ -1,5 +1,5 @@
 import { db } from "~/server/db";
-import { createTRPCRouter } from "../trpc";
+import { router } from "../trpc";
 import { z } from "zod";
 
 const input = z.object({
@@ -7,7 +7,7 @@ const input = z.object({
   flavor: z.string(),
 });
 
-export const combinationRouter = createTRPCRouter({
+export const combinationRouter = router({
   // rateCombo: protectedProcedure.query(async ({ input }) => {
   //   const newChip = await db.combination.create({
   //     data: {

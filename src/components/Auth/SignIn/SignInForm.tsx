@@ -13,9 +13,9 @@ const StyledTextField = styled(TextField)`
 `;
 
 const SignUpSchema = z.object({
-  username: z
+  email: z
     .string()
-    .min(5, { message: "Username must contain atleast 5 characters" }),
+    .min(3, { message: "Username must contain atleast 5 characters" }),
   password: z
     .string()
     .min(6, { message: "Password must contain atleast 8 characters" }),
@@ -32,7 +32,7 @@ export const SignInForm = () => {
     handleSubmit,
   } = useForm<SignUpValues>({
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
     resolver: zodResolver(SignUpSchema),
@@ -40,7 +40,10 @@ export const SignInForm = () => {
 
   const onSubmit = async (data: SignUpValues) => {
     try {
-      console.log(data);
+      await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+      });
     } catch (error) {
       console.log("error!", error);
     }
@@ -73,10 +76,10 @@ export const SignInForm = () => {
         >
           <StyledTextField
             InputLabelProps={{ shrink: true }}
-            {...register("username")}
+            {...register("email")}
             onChange={(e) => {
-              setValue("username", e.target.value);
-              void trigger("username");
+              setValue("email", e.target.value);
+              void trigger("email");
             }}
             variant="outlined"
             sx={{
@@ -85,10 +88,10 @@ export const SignInForm = () => {
             }}
             type="text"
             size="small"
-            label="Username"
+            label="Email"
             fullWidth
-            helperText={errors.username?.message}
-            error={Boolean(errors.username)}
+            helperText={errors.email?.message}
+            error={Boolean(errors.email)}
           />
           <Box
             sx={{
@@ -137,7 +140,7 @@ export const SignInForm = () => {
               height: 45,
             }}
           >
-            Sign Up
+            Sign In
           </Button>
         </Box>
       </Box>

@@ -1,8 +1,8 @@
-import { createTRPCRouter } from "~/server/api/trpc";
 import { userRouter } from "./routers/user";
 import { combinationRouter } from "./routers/combination";
+import { router } from "./trpc";
 
-export const appRouter = createTRPCRouter({
+export const appRouter = router({
   user: userRouter,
   combination: combinationRouter,
 });

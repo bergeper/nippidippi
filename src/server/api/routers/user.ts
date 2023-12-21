@@ -1,15 +1,23 @@
 import { z } from "zod";
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { publicProcedure, router } from "~/server/api/trpc";
 import { db } from "~/server/db";
 
-export const userRouter = createTRPCRouter({
+const createUserInput = z.object({
+  username: z.string(),
+  email: z.string(),
+  password: z.string(),
+});
+
+export const userRouter = router({
   createUser: publicProcedure
-    .input(z.object({ name: z.string(), password: z.string() }))
-    .query(async ({ input }) => {
+    .input(createUserInput)
+    .mutation(async ({ input }) => {
+      console.log("USER");
       const newUser = await db.user.create({
         data: {
-          username: input.name,
+          username: input.username,
+          email: input.email,
           password: input.password,
         },
       });

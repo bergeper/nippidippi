@@ -1,7 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, Link, styled, TextField } from "@mui/material";
+import { Box, Button, styled, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
+
 import { z } from "zod";
+import { trpcApi } from "~/server/trpc/proxyTRPC";
 
 const StyledTextField = styled(TextField)`
   & .MuiOutlinedInput-root {
@@ -15,6 +17,7 @@ const SignUpSchema = z.object({
   username: z
     .string()
     .min(5, { message: "Username must contain atleast 5 characters" }),
+  email: z.string().email("Please enter a valid email."),
   password: z
     .string()
     .min(6, { message: "Password must contain atleast 8 characters" }),
@@ -32,6 +35,7 @@ export const SignUpForm = () => {
   } = useForm<SignUpValues>({
     defaultValues: {
       username: "",
+      email: "",
       password: "",
     },
     resolver: zodResolver(SignUpSchema),
@@ -39,6 +43,11 @@ export const SignUpForm = () => {
 
   const onSubmit = async (data: SignUpValues) => {
     try {
+      await trpcApi.user.createUser.mutate({
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      });
       console.log(data);
     } catch (error) {
       console.log("error!", error);
@@ -70,6 +79,25 @@ export const SignUpForm = () => {
             void handleSubmit(onSubmit)(e);
           }}
         >
+          <StyledTextField
+            InputLabelProps={{ shrink: true }}
+            {...register("email")}
+            onChange={(e) => {
+              setValue("email", e.target.value);
+              void trigger("email");
+            }}
+            variant="outlined"
+            sx={{
+              input: { color: "white", borderColor: "#ffffff" },
+              label: { color: "white", borderColor: "#ffffff" },
+            }}
+            type="text"
+            size="small"
+            label="Email"
+            fullWidth
+            helperText={errors.email?.message}
+            error={Boolean(errors.email)}
+          />
           <StyledTextField
             InputLabelProps={{ shrink: true }}
             {...register("username")}

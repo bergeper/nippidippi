@@ -1,19 +1,30 @@
 // This is your Prisma schema file,
 // learn more about it in the docs https//pris.ly/d/prisma-schema
 
+// generator client {
+//     provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "postgresql"
+//   url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+//   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+// }
+
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
-
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider = "mysql"
+  url = env("DATABASE_URL")
+  relationMode = "prisma"
 }
-
 model User {
   id String        @id @default(uuid())
   username String       @unique
+  email    String       @unique
+  firstName      String?
+  lastName       String?
   password String
   ratings Rating[]  
 }
@@ -41,6 +52,9 @@ model Rating {
   user User        @relation(fields: [userId], references: [id])
   combinationId String
   combination Combination @relation(fields: [combinationId], references: [id])
+
+  @@index([userId])
+  @@index([combinationId])
 }
 
 
@@ -54,4 +68,7 @@ model Combination {
   dip Dip   @relation(fields: [dipId], references: [id])
   rating Float   
   ratings Rating[]  
+
+  @@index([chipId])
+  @@index([dipId])
 }
