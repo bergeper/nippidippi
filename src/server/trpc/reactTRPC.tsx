@@ -12,18 +12,10 @@ export const trpcHook = createTRPCReact<AppRouter>({});
 export function TRPCProvider({ children }: PropsWithChildren) {
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
     trpcHook.createClient({
       links: [
         httpBatchLink({
           url: "/api/trpc",
-
-          // You can pass any HTTP headers you wish here
-          async headers() {
-            return {
-              // authorization: getAuthCookie(),
-            };
-          },
         }),
       ],
     })

@@ -3,8 +3,6 @@ import { createInnerTRPCContext } from "../api/trpc";
 
 const context = createInnerTRPCContext({
   session: null,
-  headers: null,
-  ssg: true,
 });
 
 /** Should be used in RSC to generate pages with SSG */

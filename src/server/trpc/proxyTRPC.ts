@@ -3,6 +3,6 @@ import { type AppRouter } from "../api/root";
 import { getUrl } from "../api/urls";
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-export const trpc = createTRPCProxyClient<AppRouter>({
+export const trpcApi = createTRPCProxyClient<AppRouter>({
   links: [httpBatchLink({ url: getUrl() })],
 });
