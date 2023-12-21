@@ -1,5 +1,5 @@
+import { TRPCProvider } from "~/server/trpc/reactTRPC";
 import AuthSessionProvider from "./NextAuthProvider";
-import { TRPCProvider } from "~/server/trpc/hookClient";
 
 export const metadata = {
   title: "NippiDippi",
