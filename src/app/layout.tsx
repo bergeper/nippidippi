@@ -1,5 +1,6 @@
 import { TRPCProvider } from "~/server/trpc/reactTRPC";
 import AuthSessionProvider from "./NextAuthProvider";
+import { Box } from "@mui/material";
 
 export const metadata = {
   title: "NippiDippi",
@@ -14,11 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <Box component="body" sx={{ margin: 0 }}>
         <AuthSessionProvider>
           <TRPCProvider>{children}</TRPCProvider>
         </AuthSessionProvider>
-      </body>
+      </Box>
     </html>
   );
 }
