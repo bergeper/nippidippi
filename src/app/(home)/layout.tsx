@@ -82,10 +82,17 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box component="main" sx={{ minHeight: "100%" }}>
+      <Box component="main" sx={{ minHeight: "100vh", width: "100%" }}>
         {children}
       </Box>
-      <Box component="footer"></Box>
+      <Box
+        component="footer"
+        sx={{
+          height: "40px",
+          backgroundColor: "black",
+          bottom: 0,
+        }}
+      ></Box>
     </>
   );
 }
