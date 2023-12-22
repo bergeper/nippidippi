@@ -41,7 +41,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            ?
+            NippiDippi
           </Typography>
 
           <Box>
