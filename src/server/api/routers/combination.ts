@@ -16,4 +16,10 @@ export const combinationRouter = router({
     });
     return combo;
   }),
+  getCombosLength: publicProcedure.query(async () => {
+    const combos = await db.combination.findMany({
+      select: { comboNr: true },
+    });
+    return combos;
+  }),
 });
