@@ -6,7 +6,7 @@ import { type ICombination } from "~/models/ICombination";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
 
 export const SpinnerWheel = () => {
-  const [combo, setCombo] = useState<ICombination | null>();
+  const [combo, setCombo] = useState<ICombination>();
   const [error, setError] = useState<string>();
 
   // const getCombo = async () => {
@@ -26,7 +26,11 @@ export const SpinnerWheel = () => {
 
   const getCombo = async () => {
     const response = await trpcApi.combination.getRandomCombo.query();
-    setCombo(response);
+    if (response) {
+      setCombo(response);
+    } else {
+      setError("Something went wrong");
+    }
   };
 
   return (
