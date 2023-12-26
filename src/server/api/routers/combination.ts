@@ -22,4 +22,20 @@ export const combinationRouter = router({
     });
     return combos;
   }),
+  getRandomCombo: publicProcedure.query(async () => {
+    const combos = await db.combination.findMany({
+      select: { comboNr: true },
+    });
+    const randomComboIndex = Math.floor(Math.random() * combos.length);
+    const randomComboNr = combos[randomComboIndex];
+    if (randomComboNr) {
+      const randomCombo = await db.combination.findUnique({
+        where: {
+          comboNr: randomComboNr.comboNr,
+        },
+        include: { chip: true, dip: true },
+      });
+      return randomCombo;
+    }
+  }),
 });
