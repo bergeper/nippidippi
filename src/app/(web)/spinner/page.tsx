@@ -1,6 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
+import { SpinnerWheel } from "~/components/Spinner/SpinnerWheel";
 import { theme } from "~/styles/theme/theme";
 
 export default function SpinnerPage() {
@@ -36,7 +37,7 @@ export default function SpinnerPage() {
             },
           }}
         >
-          Link box
+          <SpinnerWheel />
         </Box>
       </Box>
     </>
