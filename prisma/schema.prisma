@@ -14,42 +14,31 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
+
 model User {
-  id String        @id @default(uuid())
-  username String       @unique
-  email    String       @unique
-  firstName      String?
-  lastName       String?
-  password String
-  ratings Rating[]  
+  id                String             @id @default(uuid())
+  username          String             @unique
+  email             String             @unique
+  firstName         String?
+  lastName          String?
+  password          String
+  triedCombinations TriedCombination[]
+  ratings           Rating[]
+
+  @@index([username])
+  @@index([email])
 }
 
-model Chip {
-  id String        @id @default(uuid())
-  name String
-  imgUrl String
-  flavor String
-  combinations Combination[]
-}
-
-model Dip {
-  id String        @id @default(uuid())
-  name String
-  imgUrl String
-  flavor String
-  combinations Combination[]
-}
-
-model Rating {
-  id String           @id @default(uuid())
-  rating Float
-  userId String
-  user User        @relation(fields: [userId], references: [id])
+model TriedCombination {
+  id          String      @id @default(uuid())
+  user        User        @relation(fields: [userId], references: [id])
+  userId        String
   combinationId String
   combination Combination @relation(fields: [combinationId], references: [id])
 
@@ -57,17 +46,45 @@ model Rating {
   @@index([combinationId])
 }
 
+model Chip {
+  id           String        @id @default(uuid())
+  name         String
+  imgUrl       String
+  flavor       String
+  combinations Combination[]
+}
+
+model Dip {
+  id           String        @id @default(uuid())
+  name         String
+  imgUrl       String
+  flavor       String
+  combinations Combination[]
+}
+
+model Rating {
+  id            String      @id @default(uuid())
+  rating        Float
+  userId        String
+  user          User        @relation(fields: [userId], references: [id])
+  combinationId String
+  combination   Combination @relation(fields: [combinationId], references: [id])
+
+  @@index([userId])
+  @@index([combinationId])
+}
 
 model Combination {
-  id String          @id @default(uuid())
-  comboNr String  @unique
-  name String
-  chipId String
-  chip Chip     @relation(fields: [chipId], references: [id])
-  dipId String
-  dip Dip   @relation(fields: [dipId], references: [id])
-  rating Float   
-  ratings Rating[]  
+  id               String             @id @default(uuid())
+  comboNr          String             @unique
+  name             String
+  chipId           String
+  chip             Chip               @relation(fields: [chipId], references: [id])
+  dipId            String
+  dip              Dip                @relation(fields: [dipId], references: [id])
+  rating           Float
+  ratings          Rating[]
+  TriedCombination TriedCombination[]
 
   @@index([chipId])
   @@index([dipId])
