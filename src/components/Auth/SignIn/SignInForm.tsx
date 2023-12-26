@@ -12,7 +12,7 @@ const StyledTextField = styled(TextField)`
   }
 `;
 
-const SignUpSchema = z.object({
+const SignInSchema = z.object({
   email: z
     .string()
     .min(3, { message: "Username must contain atleast 5 characters" }),
@@ -21,7 +21,7 @@ const SignUpSchema = z.object({
     .min(6, { message: "Password must contain atleast 8 characters" }),
 });
 
-type SignUpValues = z.infer<typeof SignUpSchema>;
+type SignUpValues = z.infer<typeof SignInSchema>;
 
 export const SignInForm = () => {
   const {
@@ -35,7 +35,7 @@ export const SignInForm = () => {
       email: "",
       password: "",
     },
-    resolver: zodResolver(SignUpSchema),
+    resolver: zodResolver(SignInSchema),
   });
 
   const onSubmit = async (data: SignUpValues) => {

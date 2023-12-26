@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { SignInModal } from "./SignIn/SignInModal";
 import { SignUpModal } from "./SignUp/SignUpModal";
-import { Button } from "@mui/material";
+import { MenuItem } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { SignOutModal } from "./SignOut/SignOutModal";
 
@@ -14,15 +14,16 @@ export const Auth = () => {
   const { data: session } = useSession();
   return (
     <>
-      <Button variant="outlined" onClick={() => setIsSignInOpen(true)}>
-        LOG IN
-      </Button>
-      <Button variant="contained" onClick={() => setIsSignUpOpen(true)}>
-        SIGN UP
-      </Button>
-      <Button variant="contained" onClick={() => setIsSignOutOpen(true)}>
-        SIGN OUT
-      </Button>
+      {!session && (
+        <>
+          <MenuItem onClick={() => setIsSignInOpen(true)}>Sign In</MenuItem>
+          <MenuItem onClick={() => setIsSignUpOpen(true)}>Sign Up</MenuItem>
+        </>
+      )}
+
+      {session && (
+        <MenuItem onClick={() => setIsSignOutOpen(true)}>Sign out</MenuItem>
+      )}
       <SignUpModal
         isModalOpen={isSignUpOpen}
         setIsSignUpOpen={setIsSignUpOpen}
@@ -35,7 +36,6 @@ export const Auth = () => {
         isModalOpen={isSignOutOpen}
         setIsSignOutOpen={setIsSignOutOpen}
       />
-      {session && <p>{JSON.stringify(session.user)}</p>}
     </>
   );
 };
