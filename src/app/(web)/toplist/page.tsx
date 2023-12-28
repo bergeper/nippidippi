@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { TopList } from "~/components/Toplist/TopList";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
 
 export default async function ToplistPage() {
@@ -9,13 +10,7 @@ export default async function ToplistPage() {
       <Typography variant="h4">Nilpa TopList</Typography>
       {response.map((c, i) => (
         <Box key={i} sx={{ backgroundColor: "whitesmoke", p: 2, m: 2 }}>
-          <Typography>{c.name}</Typography>
-          <Typography>{c.comboNr}</Typography>
-          <Typography>{c.rating}</Typography>
-          <Box>
-            {/* <Typography>{c.chip.name}</Typography>
-            <Typography>{c.dip.name}</Typography> */}
-          </Box>
+          <TopList combo={c} />
         </Box>
       ))}
     </Box>
