@@ -6,7 +6,7 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { type ICombination } from "~/models/ICombination";
 
 interface Props {
-  combo?: ICombination;
+  combo: ICombination;
   isModalOpen: boolean;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 }
@@ -60,11 +60,7 @@ export const CombinationModal = (props: Props) => {
               pt: 10,
             }}
           >
-            {props.combo?.chip && <p>{props.combo?.chip.flavor}</p>}
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis
-            voluptatum non nemo aliquam nesciunt eos assumenda dolor, amet vero
-            praesentium sequi aspernatur, porro ducimus quae, quas harum ipsa.
-            Expedita, exercitationem.
+            {props.combo.chip.name} - {props.combo.chip.flavor}
           </Box>
         </Box>
       </Modal>
