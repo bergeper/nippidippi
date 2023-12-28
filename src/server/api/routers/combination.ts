@@ -1,9 +1,12 @@
 import { db } from "~/server/db";
-import { publicProcedure, router } from "../trpc";
+import { loggedInProcedure, publicProcedure, router } from "../trpc";
 import { z } from "zod";
 
 const getComboInput = z.object({
   comboNr: z.string(),
+});
+const comboId = z.object({
+  comboId: z.string(),
 });
 
 export const combinationRouter = router({
@@ -37,5 +40,15 @@ export const combinationRouter = router({
       });
       return randomCombo;
     }
+  }),
+  saveCombo: loggedInProcedure.input(comboId).mutation(async (opts) => {
+    const { ctx, input } = opts;
+    const saveCombo = await ctx.db.triedCombination.create({
+      data: {
+        user: { connect: { id: ctx.session.user.id } },
+        combination: { connect: { id: input.comboId } },
+      },
+    });
+    return saveCombo;
   }),
 });
