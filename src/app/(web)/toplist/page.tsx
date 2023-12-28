@@ -4,14 +4,18 @@ import { trpcApi } from "~/server/trpc/proxyTRPC";
 
 export default async function ToplistPage() {
   const combos = await trpcApi.combination.getTopCombos.query();
-  return (
-    <Box>
-      <Typography variant="h4">Nilpa TopList</Typography>
-      {combos.map((c, i) => (
-        <Box key={i} sx={{ backgroundColor: "whitesmoke", p: 2, m: 2 }}>
-          <TopList combo={c} />
-        </Box>
-      ))}
-    </Box>
-  );
+  if (combos) {
+    return (
+      <Box>
+        <Typography variant="h4">Nilpa TopList</Typography>
+        {combos.map((c, i) => (
+          <Box key={i} sx={{ backgroundColor: "whitesmoke", p: 2, m: 2 }}>
+            <TopList combo={c} />
+          </Box>
+        ))}
+      </Box>
+    );
+  } else {
+    return <>ERROR</>;
+  }
 }
