@@ -46,12 +46,7 @@ export const combinationRouter = router({
     return saveCombo;
   }),
   getTopCombos: publicProcedure.query(async () => {
-    const combos = await db.combination.findMany({
-      include: {
-        chip: true,
-        dip: true,
-      },
-    });
+    const combos = await db.combination.findMany({});
 
     // Create Logic here for top 10 ratings
 
