@@ -37,8 +37,15 @@ export const SpinnerWheel = () => {
     }
   };
 
-  const saveResult = async () => {
-    console.log(combo);
+  const saveResult = async (id: string) => {
+    const response = await trpcApi.combination.saveCombo.mutate({
+      comboId: id,
+    });
+
+    if (response) {
+      console.log(combo);
+    } else {
+    }
   };
 
   return (
@@ -53,7 +60,9 @@ export const SpinnerWheel = () => {
 
       {JSON.stringify(combo?.name)}
       {error}
-      {session && <Button onClick={saveResult}>Save Result</Button>}
+      {session && combo && (
+        <Button onClick={() => saveResult(combo.id)}>Save Result</Button>
+      )}
     </>
   );
 };
