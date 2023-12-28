@@ -1,12 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import { TopList } from "~/components/Toplist/TopList";
-import { trpcApi } from "~/server/trpc/proxyTRPC";
+import { trpcCaller } from "~/server/trpc/serverTRPC";
 
 export default async function ToplistPage() {
-  const combos = await trpcApi.combination.getTopCombos.query();
+  const combos = await trpcCaller.combination.getTopCombos();
   if (combos) {
     return (
-      <Box>
+      <Box component="section">
         <Typography variant="h4">Nilpa TopList</Typography>
         {combos.map((c, i) => (
           <Box key={i} sx={{ backgroundColor: "whitesmoke", p: 2, m: 2 }}>
