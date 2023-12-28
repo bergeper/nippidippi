@@ -19,12 +19,6 @@ export const combinationRouter = router({
     });
     return combo;
   }),
-  getCombosLength: publicProcedure.query(async () => {
-    const combos = await db.combination.findMany({
-      select: { comboNr: true },
-    });
-    return combos;
-  }),
   getRandomCombo: publicProcedure.query(async () => {
     const combos = await db.combination.findMany({
       select: { comboNr: true },
@@ -52,7 +46,12 @@ export const combinationRouter = router({
     return saveCombo;
   }),
   getTopCombos: publicProcedure.query(async () => {
-    const combos = await db.combination.findMany({});
+    const combos = await db.combination.findMany({
+      include: {
+        chip: true,
+        dip: true,
+      },
+    });
 
     // Create Logic here for top 10 ratings
 
