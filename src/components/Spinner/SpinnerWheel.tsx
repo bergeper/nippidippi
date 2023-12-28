@@ -1,13 +1,17 @@
 "use client";
 
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useState } from "react";
 import { type ICombination } from "~/models/ICombination";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
+import RouletteWheel from "public/images/roulette-wheel.png";
 
 export const SpinnerWheel = () => {
   const [combo, setCombo] = useState<ICombination>();
   const [error, setError] = useState<string>();
+  const { data: session } = useSession();
 
   // const getCombo = async () => {
   //   const combosLength = await trpcApi.combination.getCombosLength.query();
@@ -33,11 +37,32 @@ export const SpinnerWheel = () => {
     }
   };
 
+  const saveResult = async (id: string) => {
+    const response = await trpcApi.combination.saveCombo.mutate({
+      comboId: id,
+    });
+
+    if (response) {
+      console.log(combo);
+    } else {
+    }
+  };
+
   return (
     <>
-      <Button onClick={getCombo}>Spin the wheel</Button>
+      <Typography variant="h4">Spin the wheel and see what you get!</Typography>
+      <Image
+        src={RouletteWheel}
+        width={350}
+        alt="Spinner wheel"
+        onClick={getCombo}
+      />
+
       {JSON.stringify(combo?.name)}
       {error}
+      {session && combo && (
+        <Button onClick={() => saveResult(combo.id)}>Save Result</Button>
+      )}
     </>
   );
 };
