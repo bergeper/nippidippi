@@ -26,12 +26,10 @@ export const TopList = (props: Props) => {
     const response = await trpcApi.combination.getCombo.query({
       comboNr: comboNr,
     });
-    console.log("2");
     if (response) {
       setCombo(response);
       setOpenModal(!openModal);
     } else {
-      console.log("error");
     }
   };
 
