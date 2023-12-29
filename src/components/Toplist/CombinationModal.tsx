@@ -78,12 +78,14 @@ export const CombinationModal = (props: Props) => {
             <Typography variant="h6">
               The dip flavor: {props.combo.dip.flavor}
             </Typography>
-            <Image
-              src={`${props.combo.dip.imgUrl}`}
-              alt={props.combo.dip.flavor}
-              width={250}
-              height={400}
-            />
+            {props.combo.dip.imgUrl !== "none" && (
+              <Image
+                src={`${props.combo.dip.imgUrl}`}
+                alt={props.combo.dip.flavor}
+                width={250}
+                height={400}
+              />
+            )}
           </Box>
         </Box>
       </Modal>
