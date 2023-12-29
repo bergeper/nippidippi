@@ -1,6 +1,7 @@
 import { db } from "~/server/db";
 import { loggedInProcedure, publicProcedure, router } from "../trpc";
 import { z } from "zod";
+import { Prisma } from "@prisma/client";
 
 const getComboInput = z.object({
   comboNr: z.string(),
@@ -18,12 +19,6 @@ export const combinationRouter = router({
       include: { chip: true, dip: true },
     });
     return combo;
-  }),
-  getCombosLength: publicProcedure.query(async () => {
-    const combos = await db.combination.findMany({
-      select: { comboNr: true },
-    });
-    return combos;
   }),
   getRandomCombo: publicProcedure.query(async () => {
     const combos = await db.combination.findMany({
@@ -50,5 +45,15 @@ export const combinationRouter = router({
       },
     });
     return saveCombo;
+  }),
+  getTopCombos: publicProcedure.query(async () => {
+    const combos = await db.combination.findMany({
+      take: 10,
+      orderBy: {
+        rating: Prisma.SortOrder.desc,
+      },
+    });
+
+    return combos;
   }),
 });
