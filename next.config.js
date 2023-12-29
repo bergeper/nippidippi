@@ -4,6 +4,10 @@
  */
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  images: {
+    domains: ["www.estrella.se", "www.olw.se"], // Add your domain here
+  },
+};
 
 export default config;
