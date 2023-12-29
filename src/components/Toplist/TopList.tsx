@@ -36,9 +36,11 @@ export const TopList = (props: Props) => {
   return (
     <>
       <Box onClick={() => dataForModal(props.combo.comboNr)}>
-        <Typography>{props.combo.name}</Typography>
-        <Typography>{props.combo.comboNr}</Typography>
-        <Typography>{props.combo.rating}</Typography>
+        <Typography variant="h5">{props.combo.name}</Typography>
+        <Typography variant="h6">
+          Combo Number: {props.combo.comboNr}
+        </Typography>
+        <Typography variant="h6">Rating: {props.combo.rating}</Typography>
       </Box>
       <CombinationModal
         combo={combo}
