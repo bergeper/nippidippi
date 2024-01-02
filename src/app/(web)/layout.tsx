@@ -80,10 +80,13 @@ export default function HomeLayout({ children }: PropsWithChildren) {
               {status === "authenticated" && (
                 <>
                   <MenuItem onClick={handleClose} href="">
-                    Profile
+                    My Pages
                   </MenuItem>
                   <MenuItem onClick={handleClose} href="">
-                    My account
+                    Settings
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} href="">
+                    Results
                   </MenuItem>
                 </>
               )}
@@ -106,7 +109,9 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           backgroundColor: "black",
           bottom: 0,
         }}
-      ></Box>
+      >
+        Footen
+      </Box>
     </>
   );
 }
