@@ -58,15 +58,22 @@ export const combinationRouter = router({
   }),
 
   // Fix so route is protected
-  getTestedCombinations: publicProcedure.query(async (opts) => {
-    const { ctx } = opts;
-    const testedCombos = await ctx.db.triedCombination.findMany({
-      where: { userId: ctx.session?.user.id },
-      include: {
-        combination: true,
-      },
-    });
+  getTestedCombinations: publicProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+      })
+    )
+    .query(async (opts) => {
+      const { ctx, input } = opts;
+      console.log(opts.ctx.session?.user.id);
+      const testedCombos = await ctx.db.triedCombination.findMany({
+        where: { userId: input.userId },
+        include: {
+          combination: true,
+        },
+      });
 
-    return testedCombos;
-  }),
+      return testedCombos;
+    }),
 });
