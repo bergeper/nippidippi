@@ -8,7 +8,7 @@ export default async function HomeLayout({ children }: PropsWithChildren) {
 
   // Change to a better reroute
   if (!session) {
-    redirect("/spinner");
+    redirect("/");
   }
   return <>{children}</>;
 }
