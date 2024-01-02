@@ -20,7 +20,7 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
 
 export const createTRPCContext = async () => {
   const session = await getServerAuthSession();
-  console.log("session logging", session);
+  console.log("session logging", session?.user.username);
   return createInnerTRPCContext({
     session: session,
   });
@@ -42,10 +42,14 @@ export const middleware = t.middleware;
 export const publicProcedure = t.procedure;
 
 // Middleware for checking if the user is logged in
-const isLoggedIn = middleware(async ({ ctx, next }) => {
-  console.log("loggedinProducre", ctx);
+const isUserLoggedIn = middleware(async (opts) => {
+  console.log("session in userloggedIn", opts.ctx.session);
+  const { ctx, next } = opts;
   if (!ctx.session || !ctx.session.user) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "You are not authorized",
+    });
   }
   return next({
     ctx: {
@@ -55,4 +59,4 @@ const isLoggedIn = middleware(async ({ ctx, next }) => {
 });
 
 // Procedure for resolvers when you are logged in.
-export const loggedInProcedure = t.procedure.use(isLoggedIn);
+export const loggedInProcedure = t.procedure.use(isUserLoggedIn);
