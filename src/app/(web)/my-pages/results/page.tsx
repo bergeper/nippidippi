@@ -1,8 +1,8 @@
-import { Box, Typography } from "@mui/material";
-import { trpcCaller } from "~/server/trpc/serverTRPC";
+import { Box } from "@mui/material";
+import { trpcApi } from "~/server/trpc/proxyTRPC";
 
 export default async function ResultsPage() {
-  const combos = await trpcCaller.combination.getTestedCombinations();
+  const combos = await trpcApi.combination.getTestedCombinations.query();
   // Get all
   console.log(combos);
 
@@ -10,7 +10,7 @@ export default async function ResultsPage() {
     <>
       <Box>
         {combos.map((c) => (
-          <Typography>{c.combination.name}</Typography>
+          <p>{c.combination.name}</p>
         ))}
       </Box>
     </>
