@@ -11,13 +11,16 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import React from "react";
+import React, { useState } from "react";
 import { type PropsWithChildren } from "react";
 import { Auth } from "~/components/Auth/Auth";
 import { useSession } from "next-auth/react";
+import { NavMenu } from "~/components/Menu/NavMenu";
 
 export default function HomeLayout({ children }: PropsWithChildren) {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
+
   const { data: session, status } = useSession();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -32,14 +35,17 @@ export default function HomeLayout({ children }: PropsWithChildren) {
       <AppBar position="static">
         <Toolbar>
           <IconButton
-            size="large"
-            edge="start"
             color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+            aria-label="open drawer"
+            onClick={() => setIsMainMenuOpen(!isMainMenuOpen)}
+            edge="start"
+            sx={{
+              marginRight: 3,
+            }}
           >
             <MenuIcon />
           </IconButton>
+
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             NippiDippi
           </Typography>
@@ -82,6 +88,10 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           </Box>
         </Toolbar>
       </AppBar>
+      <NavMenu
+        isOpen={isMainMenuOpen}
+        closeMenu={() => setIsMainMenuOpen(!isMainMenuOpen)}
+      />
       <Box component="main" sx={{ minHeight: "100vh", width: "100%" }}>
         {children}
       </Box>
