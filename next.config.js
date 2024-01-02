@@ -5,6 +5,7 @@
 
 /** @type {import("next").NextConfig} */
 const config = {
+  reactStrictMode: true,
   images: {
     domains: ["www.estrella.se", "www.olw.se"], // Add your domain here
   },
