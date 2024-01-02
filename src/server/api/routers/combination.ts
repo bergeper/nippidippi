@@ -96,20 +96,37 @@ export const combinationRouter = router({
         comboId: z.string(),
       })
     )
-    .query(async (opts) => {
+    .mutation(async (opts) => {
       const { ctx, input } = opts;
-      const comboToRate = await db.combination.findUnique({
-        where: { id: input.comboId },
+
+      const newRating = await ctx.db.rating.create({
+        data: {
+          rating: input.rating,
+          user: { connect: { id: ctx.session.user.id } },
+          combination: { connect: { id: input.comboId } },
+        },
       });
 
-      if (!comboToRate) {
-        throw new Error("Combination not found");
-      }
+      // Check if user has already RATED the combination
 
-      // const newating =
-      //   (comboToRate.rating * comboToRate.ratings.length + input.rating) /
-      //   (comboToRate.ratings.length + 1);
-      // I want to take comboToRates number and add new rating.
-      return;
+      const comboToRate = await db.combination.findUnique({
+        where: { id: input.comboId },
+        include: { ratings: true },
+      });
+
+      if (comboToRate) {
+        const newRatings =
+          (comboToRate.rating * comboToRate.ratings.length + input.rating) /
+          (comboToRate.ratings.length + 1);
+
+        const updatedCombo = await db.combination.update({
+          where: { id: input.comboId },
+          data: {
+            rating: newRatings,
+          },
+        });
+
+        return updatedCombo;
+      }
     }),
 });
