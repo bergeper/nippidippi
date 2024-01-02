@@ -18,7 +18,7 @@ interface Props {
   };
 }
 
-export const TopList = (props: Props) => {
+export const CombinationList = (props: Props) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [combo, setCombo] = useState<ICombination>(defaultCombo);
 
