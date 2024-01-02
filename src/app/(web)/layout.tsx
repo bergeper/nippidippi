@@ -76,11 +76,15 @@ export default function HomeLayout({ children }: PropsWithChildren) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <Typography>{session?.user.username}</Typography>
+              <MenuItem disabled>{session?.user.username}</MenuItem>
               {status === "authenticated" && (
                 <>
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={handleClose} href="">
+                    Profile
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} href="">
+                    My account
+                  </MenuItem>
                 </>
               )}
               <Auth />
