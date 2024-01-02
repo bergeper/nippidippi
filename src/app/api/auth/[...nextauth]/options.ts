@@ -20,14 +20,12 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     session: async ({ session }) => {
-      console.log("sessions 1: ", session);
       if (!session.user?.email) return { ...session };
       const dbUser = await db.user.findUnique({
         where: { email: session.user?.email },
       });
 
       if (!dbUser) return { ...session };
-      console.log("sessions 2: ", session);
       return {
         ...session,
         user: {
@@ -60,8 +58,6 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials) throw Error("missing credentials");
         const { email, password } = credentials;
-        console.log(credentials);
-
         const user = await db.user.findUnique({
           where: { email: email },
         });
