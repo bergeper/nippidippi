@@ -56,10 +56,12 @@ export const combinationRouter = router({
 
     return combos;
   }),
-  getTestedCombinations: loggedInProcedure.query(async (opts) => {
+
+  // Fix so route is protected
+  getTestedCombinations: publicProcedure.query(async (opts) => {
     const { ctx } = opts;
     const testedCombos = await ctx.db.triedCombination.findMany({
-      where: { userId: ctx.session.user.id },
+      where: { userId: ctx.session?.user.id },
       include: {
         combination: true,
       },
