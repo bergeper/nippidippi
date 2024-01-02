@@ -84,7 +84,7 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                 </ListItem>
               </Link>
               {session && (
-                <Link id="my-pages" color="textSecondary" href="/my-pages/slug">
+                <Link id="my-pages" color="textSecondary" href="/my-pages">
                   <ListItem disablePadding sx={{ p: 0.5 }}>
                     <ListItemButton sx={{ p: 0.5 }}>
                       <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
