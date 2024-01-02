@@ -17,11 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Box component="body" sx={{ margin: 0 }}>
-        <MuiThemeProvider>
-          <AuthSessionProvider>
+        <AuthSessionProvider>
+          <MuiThemeProvider>
             <TRPCProvider>{children}</TRPCProvider>
-          </AuthSessionProvider>
-        </MuiThemeProvider>
+          </MuiThemeProvider>
+        </AuthSessionProvider>
       </Box>
     </html>
   );
