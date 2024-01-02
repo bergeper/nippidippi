@@ -20,12 +20,17 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     session: async ({ session }) => {
-      if (!session.user?.email) return { ...session };
+      if (!session.user?.email) {
+        return { ...session };
+      }
       const dbUser = await db.user.findUnique({
         where: { email: session.user?.email },
       });
 
-      if (!dbUser) return { ...session };
+      if (!dbUser) {
+        return { ...session };
+      }
+
       return {
         ...session,
         user: {
