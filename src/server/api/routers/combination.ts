@@ -56,4 +56,15 @@ export const combinationRouter = router({
 
     return combos;
   }),
+  getTestedCombinations: loggedInProcedure.query(async (opts) => {
+    const { ctx } = opts;
+    const testedCombos = await ctx.db.triedCombination.findMany({
+      where: { userId: ctx.session.user.id },
+      include: {
+        combination: true,
+      },
+    });
+
+    return testedCombos;
+  }),
 });
