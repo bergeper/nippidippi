@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { CombinationList } from "~/components/Combination/CombinationList";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
 
 export default async function ResultsPage() {
@@ -8,11 +9,11 @@ export default async function ResultsPage() {
 
   return (
     <>
-      <Box>
-        {combos.map((c) => (
-          <p>{c.combination.name}</p>
-        ))}
-      </Box>
+      {combos.map((c, i) => (
+        <Box key={i} sx={{ backgroundColor: "whitesmoke", p: 2, m: 2 }}>
+          <CombinationList combo={c.combination} />
+        </Box>
+      ))}
     </>
   );
 }
