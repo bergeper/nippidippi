@@ -1,19 +1,28 @@
 import { Box } from "@mui/material";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "~/app/api/auth/[...nextauth]/options";
 import { CombinationList } from "~/components/Combination/CombinationList";
-import { trpcApi } from "~/server/trpc/proxyTRPC";
+import { trpcCaller } from "~/server/trpc/serverTRPC";
 
 export default async function ResultsPage() {
-  const combos = await trpcApi.combination.getTestedCombinations.query();
-  // Get all
-  console.log(combos);
+  const session = await getServerSession(authOptions);
 
-  return (
-    <>
-      {combos.map((c, i) => (
-        <Box key={i} sx={{ backgroundColor: "whitesmoke", p: 2, m: 2 }}>
-          <CombinationList combo={c.combination} />
-        </Box>
-      ))}
-    </>
-  );
+  if (session) {
+    const combos = await trpcCaller.combination.getTestedCombinations({
+      userId: session.user.id,
+    });
+    return (
+      <>
+        {combos.map((c, i) => (
+          <Box key={i} sx={{ backgroundColor: "whitesmoke", p: 2, m: 2 }}>
+            <CombinationList combo={c.combination} />
+          </Box>
+        ))}
+      </>
+    );
+  }
+  if (!session) {
+    redirect("/");
+  }
 }
