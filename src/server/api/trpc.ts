@@ -20,9 +20,8 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
 
 export const createTRPCContext = async () => {
   const session = await getServerAuthSession();
-  console.log(session);
-  // eslint-disable-next-line @typescript-eslint/await-thenable
-  return await createInnerTRPCContext({
+  console.log("session logging", session);
+  return createInnerTRPCContext({
     session: session,
   });
 };
@@ -44,6 +43,7 @@ export const publicProcedure = t.procedure;
 
 // Middleware for checking if the user is logged in
 const isLoggedIn = middleware(async ({ ctx, next }) => {
+  console.log("loggedinProducre", ctx);
   if (!ctx.session || !ctx.session.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
