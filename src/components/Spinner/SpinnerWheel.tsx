@@ -13,21 +13,6 @@ export const SpinnerWheel = () => {
   const [error, setError] = useState<string>();
   const { data: session } = useSession();
 
-  // const getCombo = async () => {
-  //   const combosLength = await trpcApi.combination.getCombosLength.query();
-  //   const randomComboIndex = Math.floor(Math.random() * combosLength.length);
-  //   const randomCombo = combosLength[randomComboIndex];
-  //   if (randomCombo) {
-  //     const response = await trpcApi.combination.getCombo.query({
-  //       comboNr: randomCombo?.comboNr,
-  //     });
-  //     setCombo(response);
-  //   } else {
-  //     console.log("What went wrong?");
-  //     setError("Something went wrong");
-  //   }
-  // };
-
   const getCombo = async () => {
     const response = await trpcApi.combination.getRandomCombo.query();
     if (response) {
@@ -45,13 +30,14 @@ export const SpinnerWheel = () => {
     if (response) {
       console.log(combo);
     } else {
+      setError("Something went wrong");
     }
   };
 
   const rateResult = async (id: string) => {
     await trpcApi.combination.rateCombo.mutate({
       comboId: id,
-      rating: 5,
+      rating: 4,
     });
   };
 
@@ -65,7 +51,7 @@ export const SpinnerWheel = () => {
         onClick={getCombo}
       />
 
-      {JSON.stringify(combo?.name)}
+      {JSON.stringify(combo?.chip.flavor)}
       {error}
       {session && combo && (
         <>
