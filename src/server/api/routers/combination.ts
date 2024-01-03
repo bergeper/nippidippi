@@ -36,6 +36,32 @@ export const combinationRouter = router({
       return randomCombo;
     }
   }),
+  getRandomComboIfLoggedIn: loggedInProcedure.query(async (opts) => {
+    const { ctx } = opts;
+    const combos = await db.combination.findMany({
+      where: {
+        NOT: {
+          TriedCombination: {
+            some: {
+              userId: ctx.session?.user.id,
+            },
+          },
+        },
+      },
+      select: { comboNr: true },
+    });
+    const randomComboIndex = Math.floor(Math.random() * combos.length);
+    const randomComboNr = combos[randomComboIndex];
+    if (randomComboNr) {
+      const randomCombo = await db.combination.findUnique({
+        where: {
+          comboNr: randomComboNr.comboNr,
+        },
+        include: { chip: true, dip: true },
+      });
+      return randomCombo;
+    }
+  }),
   saveCombo: loggedInProcedure.input(comboId).mutation(async (opts) => {
     const { ctx, input } = opts;
     const existingCombo = await ctx.db.triedCombination.findFirst({
