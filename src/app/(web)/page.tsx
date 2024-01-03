@@ -26,7 +26,7 @@ export default function HomePage() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            rotate: "-40deg",
+            // rotate: "-40deg",
             [theme.breakpoints.down("sm")]: {
               width: "100%",
             },
