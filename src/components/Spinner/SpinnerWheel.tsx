@@ -7,6 +7,7 @@ import { useState } from "react";
 import { type ICombination } from "~/models/ICombination";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
 import RouletteWheel from "public/images/roulette-wheel.png";
+import { ShowCombo } from "../Combination/ShowCombo";
 
 export const SpinnerWheel = () => {
   const [combo, setCombo] = useState<ICombination>();
@@ -46,20 +47,20 @@ export const SpinnerWheel = () => {
 
   return (
     <>
-      <Typography variant="h4">Spin the wheel and see what you get!</Typography>
+      <Typography variant="h4" sx={{ fontSize: "1.5rem" }}>
+        Spin the wheel and see what you get!
+      </Typography>
       <Image
         src={RouletteWheel}
-        width={350}
+        width={250}
         alt="Spinner wheel"
         onClick={getCombo}
       />
 
-      {JSON.stringify(combo?.name)}
+      {combo && <ShowCombo combo={combo} />}
       {error}
       {session && combo && (
-        <>
-          <Button onClick={() => saveResult(combo.id)}>Save Result</Button>
-        </>
+        <Button onClick={() => saveResult(combo.id)}>Save Result</Button>
       )}
     </>
   );
