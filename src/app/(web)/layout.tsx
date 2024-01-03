@@ -80,13 +80,13 @@ export default function HomeLayout({ children }: PropsWithChildren) {
               <MenuItem disabled>{session?.user.username}</MenuItem>
               {status === "authenticated" && (
                 <>
-                  <MenuItem onClick={handleClose} href="">
+                  <MenuItem href="/my-pages" onClick={handleClose}>
                     My Pages
                   </MenuItem>
-                  <MenuItem onClick={handleClose} href="">
+                  <MenuItem onClick={handleClose} href="/my-pages/settings">
                     Settings
                   </MenuItem>
-                  <MenuItem onClick={handleClose} href="">
+                  <MenuItem onClick={handleClose} href="/my-pages/results">
                     Results
                   </MenuItem>
                 </>
@@ -104,7 +104,8 @@ export default function HomeLayout({ children }: PropsWithChildren) {
         component="main"
         sx={{
           minHeight: "100vh",
-          width: "100%",
+          width: "auto",
+          padding: "1rem",
           background: theme.palette.primary.dark,
         }}
       >
