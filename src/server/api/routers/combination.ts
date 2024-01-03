@@ -99,34 +99,50 @@ export const combinationRouter = router({
     .mutation(async (opts) => {
       const { ctx, input } = opts;
 
-      const newRating = await ctx.db.rating.create({
-        data: {
-          rating: input.rating,
-          user: { connect: { id: ctx.session.user.id } },
-          combination: { connect: { id: input.comboId } },
-        },
+      const doesRatingExist = await ctx.db.rating.findFirst({
+        where: { userId: ctx.session.user.id, combinationId: input.comboId },
       });
-
-      // Check if user has already RATED the combination
 
       const comboToRate = await db.combination.findUnique({
         where: { id: input.comboId },
         include: { ratings: true },
       });
 
+      if (doesRatingExist) {
+        await ctx.db.rating.update({
+          where: { id: doesRatingExist.id },
+          data: {
+            rating: input.rating,
+          },
+        });
+      }
+
+      if (!doesRatingExist) {
+        await ctx.db.rating.create({
+          data: {
+            rating: input.rating,
+            user: { connect: { id: ctx.session.user.id } },
+            combination: { connect: { id: input.comboId } },
+          },
+        });
+      }
+
       if (comboToRate) {
-        const newRatings =
+        const updatedRating =
           (comboToRate.rating * comboToRate.ratings.length + input.rating) /
           (comboToRate.ratings.length + 1);
 
         const updatedCombo = await db.combination.update({
           where: { id: input.comboId },
           data: {
-            rating: newRatings,
+            rating: updatedRating,
           },
         });
 
         return updatedCombo;
+      } else {
+        console.log("Rating does already exist");
+        return "Rating does already exist";
       }
     }),
 });
