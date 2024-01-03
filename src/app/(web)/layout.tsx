@@ -16,6 +16,7 @@ import { type PropsWithChildren } from "react";
 import { Auth } from "~/components/Auth/Auth";
 import { useSession } from "next-auth/react";
 import { NavMenu } from "~/components/Menu/NavMenu";
+import { theme } from "~/styles/theme/theme";
 
 export default function HomeLayout({ children }: PropsWithChildren) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -99,7 +100,14 @@ export default function HomeLayout({ children }: PropsWithChildren) {
         isOpen={isMainMenuOpen}
         closeMenu={() => setIsMainMenuOpen(!isMainMenuOpen)}
       />
-      <Box component="main" sx={{ minHeight: "100vh", width: "100%" }}>
+      <Box
+        component="main"
+        sx={{
+          minHeight: "100vh",
+          width: "100%",
+          background: theme.palette.primary.dark,
+        }}
+      >
         {children}
       </Box>
       <Box
