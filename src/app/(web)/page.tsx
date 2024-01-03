@@ -50,7 +50,7 @@ export default function HomePage() {
           <Typography variant="h1" sx={{ fontSize: "35px" }}>
             Dont know what chip to buy?
           </Typography>
-          <Button href="">Press here!</Button>
+          <Button href="/spinner">Press here!</Button>
         </Box>
       </Box>
     </>
