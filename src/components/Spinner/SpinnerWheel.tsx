@@ -14,11 +14,21 @@ export const SpinnerWheel = () => {
   const { data: session } = useSession();
 
   const getCombo = async () => {
-    const response = await trpcApi.combination.getRandomCombo.query();
-    if (response) {
-      setCombo(response);
+    if (session) {
+      const response =
+        await trpcApi.combination.getRandomComboIfLoggedIn.query();
+      if (response) {
+        setCombo(response);
+      } else {
+        setError("Something went Wrong");
+      }
     } else {
-      setError("Something went wrong");
+      const response = await trpcApi.combination.getRandomCombo.query();
+      if (response) {
+        setCombo(response);
+      } else {
+        setError("Something went wrong");
+      }
     }
   };
 
@@ -44,7 +54,7 @@ export const SpinnerWheel = () => {
         onClick={getCombo}
       />
 
-      {JSON.stringify(combo?.chip.flavor)}
+      {JSON.stringify(combo?.name)}
       {error}
       {session && combo && (
         <>
