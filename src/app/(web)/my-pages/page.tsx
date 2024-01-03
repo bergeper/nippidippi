@@ -1,3 +1,4 @@
+import { Button, Typography } from "@mui/material";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { authOptions } from "~/app/api/auth/[...nextauth]/options";
@@ -9,5 +10,12 @@ export default async function SettingsPage() {
   if (!session) {
     redirect("/");
   }
-  return <h1>My Pages</h1>;
+  return (
+    <>
+      <Typography>Welcome to {session.user.username}</Typography>
+      <Typography>Here you can rate your tested combinations</Typography>
+      <Button href="/my-pages/results">The Combos you tested</Button>
+      <Button href="/my-pages/settings">Your Settings</Button>
+    </>
+  );
 }
