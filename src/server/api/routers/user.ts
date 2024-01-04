@@ -1,11 +1,15 @@
 import { z } from "zod";
 
-import { publicProcedure, router } from "~/server/api/trpc";
+import { loggedInProcedure, publicProcedure, router } from "~/server/api/trpc";
 import { db } from "~/server/db";
 
 const createUserInput = z.object({
   username: z.string(),
   email: z.string(),
+  password: z.string(),
+});
+
+const passwordInput = z.object({
   password: z.string(),
 });
 
@@ -25,5 +29,18 @@ export const userRouter = router({
       return {
         user: newUser,
       };
+    }),
+  updatePassword: loggedInProcedure
+    .input(passwordInput)
+    .mutation(async (opts) => {
+      const { ctx, input } = opts;
+
+      const updatePass = await ctx.db.user.update({
+        where: { id: ctx.session.user.id },
+        data: {
+          password: input.password,
+        },
+      });
+      return updatePass;
     }),
 });

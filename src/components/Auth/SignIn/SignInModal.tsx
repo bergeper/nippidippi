@@ -25,7 +25,7 @@ export const SignInModal = (props: Props) => {
           position: "relative" as const,
           width: "300px",
           height: "400px",
-          backgroundColor: "#1f1e1e",
+          backgroundColor: "#303030",
           borderRadius: 2,
         }}
       >

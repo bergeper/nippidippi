@@ -17,7 +17,7 @@ export const theme = createTheme({
       main: "#656ACE",
     },
     secondary: {
-      main: "#5c2696",
+      main: "#656ACE",
     },
     tertiary: "#ffffff",
     link: {
@@ -31,6 +31,9 @@ export const theme = createTheme({
     },
     error: {
       main: "#ffffff",
+    },
+    background: {
+      default: "#ffffff",
     },
   },
 });

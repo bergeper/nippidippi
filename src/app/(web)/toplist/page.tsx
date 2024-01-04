@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { TopList } from "~/components/Toplist/TopList";
+import { CombinationList } from "~/components/Combination/CombinationList";
 import { trpcCaller } from "~/server/trpc/serverTRPC";
 
 export default async function ToplistPage() {
@@ -11,7 +11,7 @@ export default async function ToplistPage() {
         <Typography variant="h4">Nilpa TopList</Typography>
         {sortedCombos.map((c, i) => (
           <Box key={i} sx={{ backgroundColor: "whitesmoke", p: 2, m: 2 }}>
-            <TopList combo={c} />
+            <CombinationList combo={c} />
           </Box>
         ))}
       </Box>

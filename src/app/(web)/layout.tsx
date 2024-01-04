@@ -16,6 +16,7 @@ import { type PropsWithChildren } from "react";
 import { Auth } from "~/components/Auth/Auth";
 import { useSession } from "next-auth/react";
 import { NavMenu } from "~/components/Menu/NavMenu";
+import { theme } from "~/styles/theme/theme";
 
 export default function HomeLayout({ children }: PropsWithChildren) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -76,11 +77,18 @@ export default function HomeLayout({ children }: PropsWithChildren) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <Typography>{session?.user.username}</Typography>
+              <MenuItem disabled>{session?.user.username}</MenuItem>
               {status === "authenticated" && (
                 <>
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem href="/my-pages" onClick={handleClose}>
+                    My Pages
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} href="/my-pages/settings">
+                    Settings
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} href="/my-pages/results">
+                    Results
+                  </MenuItem>
                 </>
               )}
               <Auth />
@@ -92,7 +100,15 @@ export default function HomeLayout({ children }: PropsWithChildren) {
         isOpen={isMainMenuOpen}
         closeMenu={() => setIsMainMenuOpen(!isMainMenuOpen)}
       />
-      <Box component="main" sx={{ minHeight: "100vh", width: "100%" }}>
+      <Box
+        component="main"
+        sx={{
+          minHeight: "100vh",
+          width: "auto",
+          padding: "1rem",
+          background: theme.palette.primary.dark,
+        }}
+      >
         {children}
       </Box>
       <Box
@@ -102,7 +118,9 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           backgroundColor: "black",
           bottom: 0,
         }}
-      ></Box>
+      >
+        Footen
+      </Box>
     </>
   );
 }

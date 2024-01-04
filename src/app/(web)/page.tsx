@@ -1,7 +1,9 @@
 "use client";
 
-import { Box } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { theme } from "~/styles/theme/theme";
+import NilpaIllu from "public/images/nilpa.png";
+import Image from "next/image";
 
 export default function HomePage() {
   return (
@@ -11,8 +13,9 @@ export default function HomePage() {
         sx={{
           display: "flex",
           width: "100%",
+          height: "auto",
           [theme.breakpoints.down("sm")]: {
-            flexDirection: "column",
+            flexDirection: "column-reverse",
           },
         }}
       >
@@ -20,12 +23,21 @@ export default function HomePage() {
           component="article"
           sx={{
             width: "50%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            // rotate: "-40deg",
             [theme.breakpoints.down("sm")]: {
               width: "100%",
             },
           }}
         >
-          Grafic Man
+          <Image
+            src={NilpaIllu}
+            width={300}
+            alt="Illustration of Nilpa the ChipGOD"
+            priority={true}
+          />
         </Box>
         <Box
           component="article"
@@ -36,7 +48,12 @@ export default function HomePage() {
             },
           }}
         >
-          Link box
+          <Typography color="inherit" variant="h1" sx={{ fontSize: "35px" }}>
+            Dont know what chip to buy?
+          </Typography>
+          <Button color="inherit" href="/spinner">
+            Press here!
+          </Button>
         </Box>
       </Box>
     </>
