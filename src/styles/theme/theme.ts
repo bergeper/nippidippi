@@ -32,6 +32,9 @@ export const theme = createTheme({
     error: {
       main: "#ffffff",
     },
+    background: {
+      default: "#ffffff",
+    },
   },
 });
 
