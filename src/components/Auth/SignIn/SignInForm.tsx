@@ -82,10 +82,6 @@ export const SignInForm = () => {
               void trigger("email");
             }}
             variant="outlined"
-            sx={{
-              input: { color: "white", borderColor: "#ffffff" },
-              label: { color: "white", borderColor: "#ffffff" },
-            }}
             type="text"
             size="small"
             label="Email"
