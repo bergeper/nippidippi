@@ -15,19 +15,29 @@ export const ShowCombo = ({ combo }: Props) => {
           <Image
             src={combo.chip.imgUrl}
             width={125}
-            height={166.66}
-            alt="test"
+            height={166.66666}
+            style={{
+              height: "auto",
+            }}
+            alt={"auto"}
           />
           <Typography>{combo.chip.name}</Typography>
           <Typography>{combo.chip.flavor}</Typography>
         </Box>
         <Box sx={{ width: "50%" }}>
-          <Image
-            src={combo.dip.imgUrl}
-            width={125}
-            height={166.66}
-            alt="test"
-          />
+          {combo.dip.imgUrl !== "/" ? (
+            <Image
+              src={combo.dip.imgUrl}
+              width={125}
+              height={166.66666}
+              style={{
+                height: "auto",
+              }}
+              alt="test"
+            />
+          ) : (
+            ""
+          )}
           <Typography>{combo.dip.name}</Typography>
           <Typography>{combo.dip.flavor}</Typography>
         </Box>
