@@ -36,6 +36,7 @@ export default function HomePage() {
             src={NilpaIllu}
             width={300}
             alt="Illustration of Nilpa the ChipGOD"
+            priority={true}
           />
         </Box>
         <Box
@@ -47,10 +48,12 @@ export default function HomePage() {
             },
           }}
         >
-          <Typography variant="h1" sx={{ fontSize: "35px" }}>
+          <Typography color="inherit" variant="h1" sx={{ fontSize: "35px" }}>
             Dont know what chip to buy?
           </Typography>
-          <Button href="/spinner">Press here!</Button>
+          <Button color="inherit" href="/spinner">
+            Press here!
+          </Button>
         </Box>
       </Box>
     </>
