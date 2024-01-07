@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import React, { useState } from "react";
 import { type PropsWithChildren } from "react";
-import { Auth } from "~/components/Auth/Auth";
+// import { Auth } from "~/components/Auth/Auth";
 import { useSession } from "next-auth/react";
 import { NavMenu } from "~/components/Menu/NavMenu";
 import { theme } from "~/styles/theme/theme";
