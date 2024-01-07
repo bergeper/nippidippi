@@ -4,7 +4,10 @@ import {
   getServerSession,
   type NextAuthOptions,
 } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+// import Credentials from "next-auth/providers/credentials";
+import DiscordProvider from "next-auth/providers/discord";
+
+const env = process.env;
 
 import { db } from "src/server/db";
 
@@ -36,7 +39,8 @@ export const authOptions: NextAuthOptions = {
         user: {
           ...session.user,
           id: dbUser.id,
-          username: dbUser.username,
+          // comment back if I want to have register
+          // username: dbUser.username,
         },
       };
     },
@@ -46,30 +50,36 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   providers: [
-    Credentials({
-      name: "Credentials",
-      credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-          placeholder: "Type you Email...",
-        },
-        password: {
-          label: "Password",
-          type: "password",
-          placeholder: "Type your Password...",
-        },
-      },
-      async authorize(credentials) {
-        if (!credentials) throw Error("missing credentials");
-        const { email, password } = credentials;
-        const user = await db.user.findUnique({
-          where: { email: email },
-        });
-        if (!user || user.password !== password) return null;
+    // comment back if I want to have register
+    // FYI: Update Schema with password.
+    // Credentials({
+    //   name: "Credentials",
+    //   credentials: {
+    //     email: {
+    //       label: "Email",
+    //       type: "email",
+    //       placeholder: "Type you Email...",
+    //     },
+    //     password: {
+    //       label: "Password",
+    //       type: "password",
+    //       placeholder: "Type your Password...",
+    //     },
+    //   },
+    //   async authorize(credentials) {
+    //     if (!credentials) throw Error("missing credentials");
+    //     const { email, password } = credentials;
+    //     const user = await db.user.findUnique({
+    //       where: { email: email },
+    //     });
+    //     if (!user || user.password !== password) return null;
 
-        return user;
-      },
+    //     return user;
+    //   },
+    // }),
+    DiscordProvider({
+      clientId: env.DISCORD_CLIENT_ID!,
+      clientSecret: env.DISCORD_CLIENT_SECRET!,
     }),
   ],
 };

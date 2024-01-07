@@ -12,7 +12,7 @@ const createUserInput = z.object({
 const passwordInput = z.object({
   password: z.string(),
 });
-
+// FYI: If routes if you want to create a user or change PW
 export const userRouter = router({
   createUser: publicProcedure
     .input(createUserInput)
@@ -20,9 +20,9 @@ export const userRouter = router({
       console.log("USER");
       const newUser = await db.user.create({
         data: {
-          username: input.username,
+          // username: input.username,
           email: input.email,
-          password: input.password,
+          // password: input.password,
         },
       });
       // Add check if user exits in db
@@ -38,7 +38,7 @@ export const userRouter = router({
       const updatePass = await ctx.db.user.update({
         where: { id: ctx.session.user.id },
         data: {
-          password: input.password,
+          // password: input.password,
         },
       });
       return updatePass;

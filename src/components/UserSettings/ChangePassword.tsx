@@ -1,17 +1,9 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, TextField, styled } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
-
-const StyledTextField = styled(TextField)`
-  & .MuiOutlinedInput-root {
-    fieldset {
-      border-color: #ffffff;
-    }
-  }
-`;
 
 const UpdatePasswordSchema = z.object({
   password: z
@@ -60,7 +52,7 @@ export const ChangePassword = () => {
         void handleSubmit(onSubmit)(e);
       }}
     >
-      <StyledTextField
+      <TextField
         InputLabelProps={{ shrink: true }}
         sx={{
           input: { color: "white", borderColor: "#ffffff" },
