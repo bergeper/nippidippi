@@ -17,6 +17,7 @@ import { Auth } from "~/components/Auth/Auth";
 import { useSession } from "next-auth/react";
 import { NavMenu } from "~/components/Menu/NavMenu";
 import { theme } from "~/styles/theme/theme";
+import Link from "next/link";
 
 export default function HomeLayout({ children }: PropsWithChildren) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -77,7 +78,6 @@ export default function HomeLayout({ children }: PropsWithChildren) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem disabled>{session?.user.username}</MenuItem>
               {status === "authenticated" && (
                 <>
                   <MenuItem href="/my-pages" onClick={handleClose}>
@@ -91,7 +91,10 @@ export default function HomeLayout({ children }: PropsWithChildren) {
                   </MenuItem>
                 </>
               )}
-              <Auth />
+              <Link href={session ? "/api/auth/signout" : "/api/auth/signin"}>
+                {session ? "Sign out" : "Sign in"}
+              </Link>
+              {/* {status === "unauthenticated" && <Auth />} */}
             </Menu>
           </Box>
         </Toolbar>
