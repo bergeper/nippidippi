@@ -1,16 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, Link, styled, TextField } from "@mui/material";
+import { Box, Button, Link, TextField } from "@mui/material";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-const StyledTextField = styled(TextField)`
-  & .MuiOutlinedInput-root {
-    fieldset {
-      border-color: #ffffff;
-    }
-  }
-`;
 
 const SignInSchema = z.object({
   email: z
@@ -74,7 +66,7 @@ export const SignInForm = () => {
             void handleSubmit(onSubmit)(e);
           }}
         >
-          <StyledTextField
+          <TextField
             InputLabelProps={{ shrink: true }}
             {...register("email")}
             onChange={(e) => {
@@ -97,12 +89,8 @@ export const SignInForm = () => {
               width: "100%",
             }}
           >
-            <StyledTextField
+            <TextField
               InputLabelProps={{ shrink: true }}
-              sx={{
-                input: { color: "white", borderColor: "#ffffff" },
-                label: { color: "white", borderColor: "#ffffff" },
-              }}
               variant="outlined"
               type="password"
               size="small"
@@ -122,7 +110,7 @@ export const SignInForm = () => {
                 fontSize: 14,
                 fontWeight: 600,
                 mt: 2,
-                color: "white",
+                // color: "black",
               }}
             >
               Forgot Password?

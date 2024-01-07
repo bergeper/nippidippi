@@ -25,14 +25,14 @@ export const SignUpModal = (props: Props) => {
           position: "relative" as const,
           width: "300px",
           height: "400px",
-          bgcolor: "#1f1e1e",
+          backgroundColor: "white",
           borderRadius: 2,
         }}
       >
         <CloseRoundedIcon
           sx={{
             position: "absolute",
-            color: "white",
+            color: "black",
             fontSize: 42,
             right: 10,
             top: 10,

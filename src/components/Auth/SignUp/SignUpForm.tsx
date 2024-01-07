@@ -1,17 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, styled, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 
 import { z } from "zod";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
-
-const StyledTextField = styled(TextField)`
-  & .MuiOutlinedInput-root {
-    fieldset {
-      border-color: #ffffff;
-    }
-  }
-`;
 
 const SignUpSchema = z.object({
   username: z
@@ -79,7 +71,7 @@ export const SignUpForm = () => {
             void handleSubmit(onSubmit)(e);
           }}
         >
-          <StyledTextField
+          <TextField
             InputLabelProps={{ shrink: true }}
             {...register("email")}
             onChange={(e) => {
@@ -87,10 +79,6 @@ export const SignUpForm = () => {
               void trigger("email");
             }}
             variant="outlined"
-            sx={{
-              input: { color: "white", borderColor: "#ffffff" },
-              label: { color: "white", borderColor: "#ffffff" },
-            }}
             type="text"
             size="small"
             label="Email"
@@ -98,7 +86,7 @@ export const SignUpForm = () => {
             helperText={errors.email?.message}
             error={Boolean(errors.email)}
           />
-          <StyledTextField
+          <TextField
             InputLabelProps={{ shrink: true }}
             {...register("username")}
             onChange={(e) => {
@@ -106,10 +94,6 @@ export const SignUpForm = () => {
               void trigger("username");
             }}
             variant="outlined"
-            sx={{
-              input: { color: "white", borderColor: "#ffffff" },
-              label: { color: "white", borderColor: "#ffffff" },
-            }}
             type="text"
             size="small"
             label="Username"
@@ -125,12 +109,8 @@ export const SignUpForm = () => {
               width: "100%",
             }}
           >
-            <StyledTextField
+            <TextField
               InputLabelProps={{ shrink: true }}
-              sx={{
-                input: { color: "white", borderColor: "#ffffff" },
-                label: { color: "white", borderColor: "#ffffff" },
-              }}
               variant="outlined"
               type="password"
               size="small"
