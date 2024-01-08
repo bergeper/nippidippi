@@ -18,12 +18,15 @@ import { useSession } from "next-auth/react";
 import { NavMenu } from "~/components/Menu/NavMenu";
 import { theme } from "~/styles/theme/theme";
 import Link from "next/link";
+import rainingChips from "public/images/rainingChips.jpg";
 
 export default function HomeLayout({ children }: PropsWithChildren) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
 
   const { data: session, status } = useSession();
+  const ImgOverlay =
+    "linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3))";
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -108,7 +111,11 @@ export default function HomeLayout({ children }: PropsWithChildren) {
         sx={{
           minHeight: "100vh",
           width: "auto",
-          background: theme.palette.primary.dark,
+          // background: theme.palette.primary.dark,
+          backgroundImage: `${ImgOverlay}, url(${rainingChips.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
         {children}
