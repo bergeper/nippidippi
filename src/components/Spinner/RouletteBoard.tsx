@@ -48,9 +48,8 @@ export const RouletteBoard = () => {
 
   useEffect(() => {
     if (!mediumWindow && !largeWindow) {
-      setWindowSize(150);
+      setWindowSize(200);
     }
-
     if (mediumWindow) {
       setWindowSize(400);
     }
@@ -63,61 +62,46 @@ export const RouletteBoard = () => {
     setCombo(defaultCombo);
     setSpinning(true);
     setResFromTRPC(false);
-    const response = await trpcApi.combination.getRandomCombo.query();
-    setTimeout(() => {
-      if (response) {
-        setCombo(response);
-      }
-    }, 2000);
-    // setSpinning(false);
-  };
-
-  const getComboLoggedIn = async () => {
-    setCombo(defaultCombo);
-    setSpinning(true);
-    setResFromTRPC(false);
-    const response = await trpcApi.combination.getRandomComboIfLoggedIn.query();
-    setTimeout(() => {
-      setSpinning(false);
-      if (!spinning) {
+    if (session) {
+      const response =
+        await trpcApi.combination.getRandomComboIfLoggedIn.query();
+      setTimeout(() => {
+        setSpinning(false);
+        if (!spinning) {
+          if (response) {
+            setCombo(response);
+          }
+        }
+      }, 3000);
+    } else {
+      const response = await trpcApi.combination.getRandomCombo.query();
+      setTimeout(() => {
         if (response) {
           setCombo(response);
         }
-      }
-    }, 3000);
+      }, 2000);
+    }
+    // setSpinning(false);
   };
 
   const saveResult = async (id: string) => {
     const response = await trpcApi.combination.saveCombo.mutate({
       comboId: id,
     });
-
     if (response) {
       setResFromTRPC(response);
     } else {
       setResFromTRPC(response);
     }
-
     setOpenSave(!openSave);
   };
 
   return (
     <>
       <Typography variant="h4" sx={{ fontSize: "1.2rem" }}>
-        Spin the wheel and see what you get!
+        Press the wheel and see what you get!
       </Typography>
-      {session && (
-        <Button onClick={getComboLoggedIn} sx={{ zIndex: 10 }}>
-          Spin the wheel
-        </Button>
-      )}
-      {!session && (
-        <Button onClick={getCombo} sx={{ zIndex: 10 }}>
-          Spin the wheel
-        </Button>
-      )}
-
-      <Box sx={{ display: "flex", position: "relative" }}>
+      <Box sx={{ display: "flex", position: "relative" }} onClick={getCombo}>
         <SpinningWheel spinning={spinning} isSpinning={setSpinning} />
         <Image
           src={WheelWithArrow}
