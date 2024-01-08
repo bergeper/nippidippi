@@ -21,7 +21,7 @@ interface Props {
 export const SpinningWheel = ({ spinning, isSpinning }: Props) => {
   const mediumWindow = useMediaQuery(theme.breakpoints.up("sm"));
   const largeWindow = useMediaQuery(theme.breakpoints.up("md"));
-  const [windowSize, setWindowSize] = useState<number>();
+  const [windowSize, setWindowSize] = useState<number>(200);
 
   useEffect(() => {
     if (!mediumWindow && !largeWindow) {

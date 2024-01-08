@@ -40,7 +40,7 @@ export const RouletteBoard = () => {
   const mediumWindow = useMediaQuery(theme.breakpoints.up("sm"));
   const largeWindow = useMediaQuery(theme.breakpoints.up("md"));
   const [openSave, setOpenSave] = useState(false);
-  const [windowSize, setWindowSize] = useState<number>();
+  const [windowSize, setWindowSize] = useState<number>(200);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [combo, setCombo] = useState<ICombination>();
   const [resFromTRPC, setResFromTRPC] = useState<boolean>(false);
