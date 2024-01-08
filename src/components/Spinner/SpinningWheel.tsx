@@ -4,10 +4,10 @@ import Image from "next/image";
 import RouletteWheel from "public/images/RouletteWheel.png";
 import { styled } from "@mui/system";
 import { useMediaQuery } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type Dispatch, type SetStateAction } from "react";
 import { theme } from "~/styles/theme/theme";
 
-const SpinningWheelContainer = styled("div")(({}) => ({
+const SpinningWheelContainer = styled("div")(() => ({
   position: "relative",
   transition: "transform 2s ease-in-out",
   transformOrigin: "50% 50%",
@@ -15,16 +15,17 @@ const SpinningWheelContainer = styled("div")(({}) => ({
 
 interface Props {
   spinning: boolean;
+  isSpinning: Dispatch<SetStateAction<boolean>>;
 }
 
-export const SpinningWheel = ({ spinning }: Props) => {
+export const SpinningWheel = ({ spinning, isSpinning }: Props) => {
   const mediumWindow = useMediaQuery(theme.breakpoints.up("sm"));
   const largeWindow = useMediaQuery(theme.breakpoints.up("md"));
   const [windowSize, setWindowSize] = useState<number>();
 
   useEffect(() => {
     if (!mediumWindow && !largeWindow) {
-      setWindowSize(250);
+      setWindowSize(150);
     }
 
     if (mediumWindow) {
@@ -34,9 +35,26 @@ export const SpinningWheel = ({ spinning }: Props) => {
       setWindowSize(500);
     }
   }, [mediumWindow, largeWindow]);
+
+  useEffect(() => {
+    if (spinning) {
+      const timeoutId = setTimeout(() => {
+        if (spinning) {
+          isSpinning(false);
+        }
+      }, 2000);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [spinning, isSpinning]);
+
   return (
     <SpinningWheelContainer
-      style={{ transform: spinning ? `rotate(5000deg)` : "" }}
+      style={{
+        transform: spinning ? `rotate(${2880}deg)` : "",
+      }}
     >
       <Image
         src={RouletteWheel}
