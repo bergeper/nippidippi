@@ -71,7 +71,7 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                 <ListItem disablePadding sx={{ p: 0.5 }}>
                   <ListItemButton sx={{ p: 0.5 }}>
                     <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
-                    <ListItemText primary="Chip-Roulette" sx={{ p: 0.5 }} />
+                    <ListItemText primary="NippiDippi Wheel" sx={{ p: 0.5 }} />
                   </ListItemButton>
                 </ListItem>
               </Link>
