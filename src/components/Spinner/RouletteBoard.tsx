@@ -24,7 +24,7 @@ export const RouletteBoard = () => {
 
   useEffect(() => {
     if (!mediumWindow && !largeWindow) {
-      setWindowSize(250);
+      setWindowSize(150);
     }
 
     if (mediumWindow) {
@@ -37,15 +37,17 @@ export const RouletteBoard = () => {
 
   const getCombo = async () => {
     setCombo(defaultCombo);
-    setSpinning(!spinning);
+    setSpinning(true);
     const response = await trpcApi.combination.getRandomCombo.query();
     setTimeout(() => {
       if (response) {
         setCombo(response);
+        console.log(spinning);
       } else {
         setError("Something went wrong");
       }
-    }, 3000);
+    }, 2000);
+    // setSpinning(false);
   };
 
   const getComboLoggedIn = async () => {
@@ -81,17 +83,19 @@ export const RouletteBoard = () => {
       <Typography variant="h4" sx={{ fontSize: "1.2rem" }}>
         Spin the wheel and see what you get!
       </Typography>
-      {session ? (
+      {session && (
         <Button onClick={getComboLoggedIn} sx={{ zIndex: 10 }}>
           Spin the wheel
         </Button>
-      ) : (
+      )}
+      {!session && (
         <Button onClick={getCombo} sx={{ zIndex: 10 }}>
           Spin the wheel
         </Button>
       )}
+
       <Box sx={{ display: "flex", position: "relative" }}>
-        <SpinningWheel spinning={spinning} />
+        <SpinningWheel spinning={spinning} isSpinning={setSpinning} />
         <Image
           src={WheelWithArrow}
           width={windowSize}
@@ -99,11 +103,26 @@ export const RouletteBoard = () => {
           style={{ position: "absolute" }}
         />
       </Box>
-      {combo && <ShowCombo combo={combo} />}
-      {error}
-      {session && combo && (
-        <Button onClick={() => saveResult(combo.id)}>Save Result</Button>
+
+      {combo && !spinning && (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            mt: 2,
+            backgroundColor: "whitesmoke",
+          }}
+        >
+          <ShowCombo combo={combo} />
+          {session && (
+            <Button onClick={() => saveResult(combo.id)}>Save Result</Button>
+          )}
+        </Box>
       )}
+      {error}
     </>
   );
 };
