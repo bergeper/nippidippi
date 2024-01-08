@@ -43,7 +43,7 @@ export const RouletteBoard = () => {
   const [windowSize, setWindowSize] = useState<number>();
   const [spinning, setSpinning] = useState<boolean>(false);
   const [combo, setCombo] = useState<ICombination>();
-  const [error, setError] = useState<string>();
+  const [resFromTRPC, setResFromTRPC] = useState<boolean>(false);
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -62,13 +62,11 @@ export const RouletteBoard = () => {
   const getCombo = async () => {
     setCombo(defaultCombo);
     setSpinning(true);
+    setResFromTRPC(false);
     const response = await trpcApi.combination.getRandomCombo.query();
     setTimeout(() => {
       if (response) {
         setCombo(response);
-        console.log(spinning);
-      } else {
-        setError("Something went wrong");
       }
     }, 2000);
     // setSpinning(false);
@@ -77,14 +75,13 @@ export const RouletteBoard = () => {
   const getComboLoggedIn = async () => {
     setCombo(defaultCombo);
     setSpinning(true);
+    setResFromTRPC(false);
     const response = await trpcApi.combination.getRandomComboIfLoggedIn.query();
     setTimeout(() => {
       setSpinning(false);
       if (!spinning) {
         if (response) {
           setCombo(response);
-        } else {
-          setError("Something went wrong");
         }
       }
     }, 3000);
@@ -96,10 +93,11 @@ export const RouletteBoard = () => {
     });
 
     if (response) {
-      console.log(combo);
+      setResFromTRPC(response);
     } else {
-      setError("Something went wrong");
+      setResFromTRPC(response);
     }
+
     setOpenSave(!openSave);
   };
 
@@ -144,35 +142,38 @@ export const RouletteBoard = () => {
           <ShowCombo combo={combo} />
           {session && (
             <>
-              <Button onClick={() => saveResult(combo.id)}>Save Result</Button>
-              <Dialog
-                open={openSave}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={() => setOpenSave(!openSave)}
-                aria-describedby="alert-dialog-slide-description"
-                sx={{
-                  backdropFilter: "none",
-                }}
+              <Button
+                onClick={() => saveResult(combo.id)}
+                disabled={resFromTRPC}
               >
-                <DialogTitle>{"This combo is saved!!!"}</DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-slide-description">
-                    You have saved this combination and can check it out and
-                    rate it on your pages!
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={() => setOpenSave(!openSave)}>
-                    Ok, nice!
-                  </Button>
-                </DialogActions>
-              </Dialog>
+                Save Result
+              </Button>
             </>
           )}
         </Box>
       )}
-      {error}
+
+      <Dialog
+        open={openSave}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={() => setOpenSave(!openSave)}
+        aria-describedby="alert-dialog-slide-description"
+        sx={{
+          backdropFilter: "none",
+        }}
+      >
+        <DialogTitle>{"This combo is saved!!!"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            You have saved this combination and can check it out and rate it on
+            your pages!
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenSave(!openSave)}>Ok, nice!</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
