@@ -25,7 +25,7 @@ export const SpinningWheel = ({ spinning, isSpinning }: Props) => {
 
   useEffect(() => {
     if (!mediumWindow && !largeWindow) {
-      setWindowSize(150);
+      setWindowSize(200);
     }
 
     if (mediumWindow) {
