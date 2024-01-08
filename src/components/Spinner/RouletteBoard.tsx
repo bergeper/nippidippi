@@ -1,10 +1,21 @@
 "use client";
 
-import { Box, Button, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { type ReactElement, type Ref, useEffect, useState } from "react";
 import { type ICombination } from "~/models/ICombination";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
 import WheelWithArrow from "public/images/RouletteBoard.png";
@@ -12,10 +23,23 @@ import { ShowCombo } from "../Combination/ShowCombo";
 import { SpinningWheel } from "./SpinningWheel";
 import { defaultCombo } from "~/models/DefaultObject";
 import { theme } from "~/styles/theme/theme";
+import { type TransitionProps } from "@mui/material/transitions";
+import React from "react";
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    children: ReactElement<any, any>;
+  },
+  ref: Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export const RouletteBoard = () => {
   const mediumWindow = useMediaQuery(theme.breakpoints.up("sm"));
   const largeWindow = useMediaQuery(theme.breakpoints.up("md"));
+  const [openSave, setOpenSave] = useState(false);
   const [windowSize, setWindowSize] = useState<number>();
   const [spinning, setSpinning] = useState<boolean>(false);
   const [combo, setCombo] = useState<ICombination>();
@@ -76,6 +100,7 @@ export const RouletteBoard = () => {
     } else {
       setError("Something went wrong");
     }
+    setOpenSave(!openSave);
   };
 
   return (
@@ -118,7 +143,32 @@ export const RouletteBoard = () => {
         >
           <ShowCombo combo={combo} />
           {session && (
-            <Button onClick={() => saveResult(combo.id)}>Save Result</Button>
+            <>
+              <Button onClick={() => saveResult(combo.id)}>Save Result</Button>
+              <Dialog
+                open={openSave}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={() => setOpenSave(!openSave)}
+                aria-describedby="alert-dialog-slide-description"
+                sx={{
+                  backdropFilter: "none",
+                }}
+              >
+                <DialogTitle>{"This combo is saved!!!"}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-slide-description">
+                    You have saved this combination and can check it out and
+                    rate it on your pages!
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={() => setOpenSave(!openSave)}>
+                    Ok, nice!
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </>
           )}
         </Box>
       )}
