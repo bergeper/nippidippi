@@ -108,7 +108,6 @@ export default function HomeLayout({ children }: PropsWithChildren) {
         sx={{
           minHeight: "100vh",
           width: "auto",
-          padding: "1rem",
           background: theme.palette.primary.dark,
         }}
       >
