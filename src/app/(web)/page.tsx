@@ -52,7 +52,7 @@ export default function HomePage() {
             Dont know what chip to buy?
           </Typography>
           <Button color="inherit" href="/spinner">
-            Press here!
+            Try My NippiDippi Wheel
           </Button>
         </Box>
       </Box>
