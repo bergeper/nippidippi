@@ -9,7 +9,6 @@ import {
   DialogContentText,
   DialogTitle,
   Slide,
-  Typography,
   useMediaQuery,
 } from "@mui/material";
 
@@ -25,6 +24,7 @@ import { defaultCombo } from "~/models/DefaultObject";
 import { theme } from "~/styles/theme/theme";
 import { type TransitionProps } from "@mui/material/transitions";
 import React from "react";
+import { SpinnerTitle } from "./SpinnerTitle";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -98,9 +98,7 @@ export const RouletteBoard = () => {
 
   return (
     <>
-      <Typography variant="h4" sx={{ fontSize: "1.2rem" }}>
-        Press the wheel and see what you get!
-      </Typography>
+      <SpinnerTitle />
       <Box sx={{ display: "flex", position: "relative" }} onClick={getCombo}>
         <SpinningWheel spinning={spinning} isSpinning={setSpinning} />
         <Image
