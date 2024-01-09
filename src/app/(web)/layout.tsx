@@ -129,6 +129,10 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          display: "flex",
+          flexDirection: "column",
+          // justifyContent: "center",
+          alignItems: "center",
           [theme.breakpoints.down("sm")]: {
             minHeight: "auto",
             flexDirection: "column-reverse",
