@@ -72,17 +72,17 @@ export const combinationRouter = router({
     });
 
     if (!existingCombo) {
-      const saveCombo = await ctx.db.triedCombination.create({
+      await ctx.db.triedCombination.create({
         data: {
           user: { connect: { id: ctx.session.user.id } },
           combination: { connect: { id: input.comboId } },
         },
       });
-      return saveCombo;
+      return true;
     } else {
       console.log("combo already saved ❤️❤️❤️❤️❤️❤️🚀🚀🚀🚀⚠️⚠️⚠️⚠️");
       // send back better request
-      return existingCombo;
+      return false;
     }
   }),
   getTopCombos: publicProcedure.query(async () => {
