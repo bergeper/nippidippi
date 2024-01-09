@@ -7,16 +7,18 @@ import { ChangePassword } from "~/components/UserSettings/ChangePassword";
 export default async function Page() {
   const session = await getServerSession(authOptions);
 
-  // Change to a better reroute
+  // Change to delete account.
   if (!session) {
     redirect("/");
   }
 
-  return (
-    <Box>
-      <Typography>Settings</Typography>
-      <Typography>Do you want to change your password?</Typography>
-      <ChangePassword />
-    </Box>
-  );
+  if (session) {
+    return (
+      <Box>
+        <Typography>Settings</Typography>
+        <Typography>Do you want to change your password?</Typography>
+        <ChangePassword />
+      </Box>
+    );
+  }
 }
