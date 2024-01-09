@@ -131,12 +131,9 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           backgroundRepeat: "no-repeat",
           display: "flex",
           flexDirection: "column",
-          // justifyContent: "center",
           alignItems: "center",
           [theme.breakpoints.down("sm")]: {
-            // minHeight: "auto",
             flexDirection: "column",
-            justifyContent: "space-between",
           },
         }}
       >
