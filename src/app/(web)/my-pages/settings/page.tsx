@@ -1,8 +1,8 @@
-import { Box, Typography } from "@mui/material";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { authOptions } from "~/app/api/auth/[...nextauth]/options";
-import { ChangePassword } from "~/components/UserSettings/ChangePassword";
+import { DeleteUser } from "~/components/UserSettings/DeleteUser";
+import { SettingsInfo } from "~/components/UserSettings/SettingsInfo";
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
@@ -14,11 +14,10 @@ export default async function Page() {
 
   if (session) {
     return (
-      <Box>
-        <Typography>Settings</Typography>
-        <Typography>Do you want to change your password?</Typography>
-        <ChangePassword />
-      </Box>
+      <>
+        <SettingsInfo />
+        <DeleteUser />
+      </>
     );
   }
 }
