@@ -14,6 +14,7 @@ import Link from "next/link";
 import React, { type Dispatch, type SetStateAction } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSession } from "next-auth/react";
+import { theme } from "~/styles/theme/theme";
 
 interface Props {
   isOpen: boolean;
@@ -44,6 +45,7 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
               flexDirection: "column",
               justifyContent: "space-between",
               height: "100vh",
+              background: theme.palette.primary.main,
             }}
             onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
@@ -71,7 +73,7 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                 <ListItem disablePadding sx={{ p: 0.5 }}>
                   <ListItemButton sx={{ p: 0.5 }}>
                     <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
-                    <ListItemText primary="Chip-Roulette" sx={{ p: 0.5 }} />
+                    <ListItemText primary="NippiDippi Wheel" sx={{ p: 0.5 }} />
                   </ListItemButton>
                 </ListItem>
               </Link>
