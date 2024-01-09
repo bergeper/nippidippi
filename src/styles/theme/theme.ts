@@ -1,20 +1,20 @@
 import { createTheme } from "@mui/material/styles";
-import { Roboto } from "next/font/google";
+import { Eczar } from "next/font/google";
 
-const roboto = Roboto({
-  weight: ["100", "300", "400", "500", "700", "900"],
-  style: ["normal", "italic"],
+const eczar = Eczar({
+  weight: ["400", "500", "700", "800"],
+  style: ["normal"],
   subsets: ["latin"],
   display: "swap",
 });
 
 export const theme = createTheme({
   typography: {
-    fontFamily: [roboto.style.fontFamily].join(","),
+    fontFamily: [eczar.style.fontFamily].join(","),
   },
   palette: {
     primary: {
-      main: "#656ACE",
+      main: "#EEE3AC",
     },
     secondary: {
       main: "#656ACE",
@@ -35,6 +35,10 @@ export const theme = createTheme({
     background: {
       default: "#ffffff",
     },
+    custom: {
+      custom:
+        "linear-gradient(rgba(238, 227, 172, 0.9), rgba(238, 227, 172, 0.9))",
+    },
   },
 });
 
@@ -44,11 +48,17 @@ declare module "@mui/material/styles" {
     link: {
       primary: string;
     };
+    custom: {
+      custom: string;
+    };
   }
   interface PaletteOptions {
     tertiary?: string;
     link?: {
       primary: string;
+    };
+    custom: {
+      custom: string;
     };
   }
 }

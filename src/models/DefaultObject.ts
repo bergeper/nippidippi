@@ -8,13 +8,13 @@ export const defaultCombo = {
   chip: {
     id: "",
     name: "",
-    imgUrl: "",
+    imgUrl: "/none",
     flavor: "",
   },
   dip: {
     id: "",
     name: "",
-    imgUrl: "",
+    imgUrl: "/none",
     flavor: "",
   },
 };
