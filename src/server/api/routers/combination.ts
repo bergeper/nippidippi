@@ -108,14 +108,23 @@ export const combinationRouter = router({
       console.log(opts.ctx.session?.user.id);
       const testedCombos = await ctx.db.triedCombination.findMany({
         where: { user: { id: input.userId } },
-        include: {
-          combination: true,
+        select: {
+          combination: {
+            include: {
+              chip: true,
+              dip: true,
+            },
+          },
+          userId: false,
+          combinationId: false,
+          id: false,
         },
       });
-
-      return testedCombos;
+      const onlyCombos = testedCombos.map(({ combination }) => combination);
+      return onlyCombos;
     }),
-  rateCombo: loggedInProcedure
+  // Protect later.
+  rateCombo: publicProcedure
     .input(
       z.object({
         rating: z.number(),
@@ -126,7 +135,7 @@ export const combinationRouter = router({
       const { ctx, input } = opts;
 
       const doesRatingExist = await ctx.db.rating.findFirst({
-        where: { userId: ctx.session.user.id, combinationId: input.comboId },
+        where: { userId: ctx.session?.user.id, combinationId: input.comboId },
       });
 
       const comboToRate = await db.combination.findUnique({
@@ -147,7 +156,7 @@ export const combinationRouter = router({
         await ctx.db.rating.create({
           data: {
             rating: input.rating,
-            user: { connect: { id: ctx.session.user.id } },
+            user: { connect: { id: ctx.session?.user.id } },
             combination: { connect: { id: input.comboId } },
           },
         });
