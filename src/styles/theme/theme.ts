@@ -35,6 +35,10 @@ export const theme = createTheme({
     background: {
       default: "#ffffff",
     },
+    custom: {
+      custom:
+        "linear-gradient(rgba(238, 227, 172, 0.9), rgba(238, 227, 172, 0.9))",
+    },
   },
 });
 
@@ -44,11 +48,17 @@ declare module "@mui/material/styles" {
     link: {
       primary: string;
     };
+    custom: {
+      custom: string;
+    };
   }
   interface PaletteOptions {
     tertiary?: string;
     link?: {
       primary: string;
+    };
+    custom: {
+      custom: string;
     };
   }
 }
