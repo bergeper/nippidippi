@@ -123,7 +123,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
       <Box
         component="main"
         sx={{
-          width: "auto",
+          minWidth: 360,
           minHeight: "100vh",
           backgroundImage: `${ImgOverlay}, url(${rainingChips.src})`,
           backgroundSize: "cover",
