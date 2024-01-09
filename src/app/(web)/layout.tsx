@@ -134,8 +134,8 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           // justifyContent: "center",
           alignItems: "center",
           [theme.breakpoints.down("sm")]: {
-            minHeight: "auto",
-            flexDirection: "column-reverse",
+            // minHeight: "auto",
+            flexDirection: "column",
             justifyContent: "space-between",
           },
         }}
