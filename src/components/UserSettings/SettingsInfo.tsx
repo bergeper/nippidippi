@@ -7,7 +7,7 @@ export const SettingsInfo = () => {
   return (
     <>
       <Box
-        component="article"
+        component="section"
         sx={{
           width: "auto",
           display: "flex",
