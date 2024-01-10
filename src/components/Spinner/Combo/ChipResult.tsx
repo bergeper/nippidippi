@@ -1,79 +1,131 @@
-import { Card, CardContent, Typography } from "@mui/material";
+"use client";
+
+import {
+  Card,
+  CardContent,
+  Grow,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { type IChip } from "~/models/IChip";
 import { theme } from "~/styles/theme/theme";
 import Image from "next/image";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 interface Props {
   chip: IChip;
 }
 
 export const ChipResult = ({ chip }: Props) => {
+  const mediumWindow = useMediaQuery(theme.breakpoints.up("sm"));
+  const largeWindow = useMediaQuery(theme.breakpoints.up("md"));
+  const [windowSize, setWindowSize] = useState<number>(200);
+
+  useEffect(() => {
+    if (!mediumWindow && !largeWindow) {
+      setWindowSize(100);
+    }
+
+    if (mediumWindow) {
+      setWindowSize(160);
+    }
+    if (largeWindow) {
+      setWindowSize(250);
+    }
+  }, [mediumWindow, largeWindow]);
+
   const splittedText = chip.flavor.split("&");
   return (
-    <Card
-      sx={{
-        background: theme.palette.custom.bg,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: "20px",
-        position: "absolute",
-        left: 30,
-        top: 12,
-        rotate: "-15deg",
-        overflow: "hidden",
-        p: 0,
-        width: "120px",
-        zIndex: 10,
-        "&:hover": {
-          scale: "1.5",
-          left: 80,
-          zIndex: 11,
-        },
-      }}
+    <Grow
+      in={!!chip}
+      mountOnEnter
+      unmountOnExit
+      style={{ transitionDelay: `${1750}ms` }}
     >
-      <CardContent
+      <Card
         sx={{
+          background: theme.palette.custom.bg,
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-evenly",
+          justifyContent: "center",
           alignItems: "center",
-          height: "100%",
-          maxWidth: "205px",
+          borderRadius: "20px",
+          position: "absolute",
+          left: 30,
+          top: 12,
+          rotate: "-15deg",
+          overflow: "hidden",
+          p: 0,
+          width: "120px",
+          zIndex: 10,
+          "&:hover": {
+            scale: "1.5",
+            left: 80,
+            zIndex: 11,
+          },
+          [theme.breakpoints.up("sm")]: {
+            width: "240px",
+            left: "2%",
+            transform: "translateY(+10%)",
+          },
+          [theme.breakpoints.up("md")]: {
+            width: "300px",
+            left: "2%",
+            transform: "translateY(+10%)",
+          },
+          [theme.breakpoints.up("md")]: {
+            width: "300px",
+            left: 0,
+            transform: "translateY(+10%)",
+          },
         }}
       >
-        {chip.imgUrl !== "/none" ? (
-          <Image
-            src={chip.imgUrl}
-            width={125}
-            height={166.66666}
-            style={{
-              height: "auto",
-              width: "100px",
-            }}
-            alt={"auto"}
-          />
-        ) : (
-          " "
-        )}
-        <Typography variant="caption" sx={{ textAlign: "center" }}>
-          {chip.name}
-        </Typography>
-        <Typography
-          variant="caption"
-          sx={{ textAlign: "center", lineHeight: 1 }}
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            height: "100%",
+            maxWidth: "205px",
+            [theme.breakpoints.up("sm")]: {
+              width: "240px",
+            },
+            [theme.breakpoints.up("md")]: {
+              width: "300px",
+            },
+          }}
         >
-          {splittedText.map((flavor, i) => (
-            <Fragment key={i}>
-              {i > 0 && <br />}
-              {flavor}
-              {i < splittedText.length - 1 && <br />}{" "}
-              {i < splittedText.length - 1 && "&"}{" "}
-            </Fragment>
-          ))}
-        </Typography>
-      </CardContent>
-    </Card>
+          {chip.imgUrl !== "/none" ? (
+            <Image
+              src={chip.imgUrl}
+              width={windowSize}
+              height={166.66666}
+              style={{
+                height: "auto",
+              }}
+              alt={"auto"}
+            />
+          ) : (
+            " "
+          )}
+          <Typography variant="caption" sx={{ textAlign: "center" }}>
+            {chip.name}
+          </Typography>
+          <Typography
+            variant="caption"
+            sx={{ textAlign: "center", lineHeight: 1 }}
+          >
+            {splittedText.map((flavor, i) => (
+              <Fragment key={i}>
+                {i > 0 && <br />}
+                {flavor}
+                {i < splittedText.length - 1 && <br />}{" "}
+                {i < splittedText.length - 1 && "&"}{" "}
+              </Fragment>
+            ))}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Grow>
   );
 };
