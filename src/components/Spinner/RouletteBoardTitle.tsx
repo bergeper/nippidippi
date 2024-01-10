@@ -15,6 +15,7 @@ export const RouletteBoardTitle = () => {
         // mt: -1,
         [theme.breakpoints.up("sm")]: {
           px: 4,
+          mt: 2,
           height: "auto",
           alignContent: "center",
           justifyContent: "center",

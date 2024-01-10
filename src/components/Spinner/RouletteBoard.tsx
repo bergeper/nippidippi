@@ -34,10 +34,10 @@ export const RouletteBoard = () => {
       setWindowSize(200);
     }
     if (mediumWindow) {
-      setWindowSize(400);
+      setWindowSize(350);
     }
     if (largeWindow) {
-      setWindowSize(500);
+      setWindowSize(400);
     }
   }, [mediumWindow, largeWindow]);
 
