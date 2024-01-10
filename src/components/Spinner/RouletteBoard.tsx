@@ -15,7 +15,7 @@ import {
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { type ReactElement, type Ref, useEffect, useState } from "react";
-import { type ICombination } from "~/models/ICombination";
+import { type IFullCombination } from "~/models/ICombination";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
 import WheelWithArrow from "public/images/RouletteBoard.png";
 import { ShowCombo } from "../Combination/ShowCombo";
@@ -42,7 +42,7 @@ export const RouletteBoard = () => {
   const [openSave, setOpenSave] = useState(false);
   const [windowSize, setWindowSize] = useState<number>(200);
   const [spinning, setSpinning] = useState<boolean>(false);
-  const [combo, setCombo] = useState<ICombination>();
+  const [combo, setCombo] = useState<IFullCombination>();
   const [resFromTRPC, setResFromTRPC] = useState<boolean>(false);
   const { data: session } = useSession();
 
@@ -66,10 +66,10 @@ export const RouletteBoard = () => {
       const response =
         await trpcApi.combination.getRandomComboIfLoggedIn.query();
       setTimeout(() => {
-        setSpinning(false);
         if (!spinning) {
           if (response) {
             setCombo(response);
+            setSpinning(false);
           }
         }
       }, 3000);
