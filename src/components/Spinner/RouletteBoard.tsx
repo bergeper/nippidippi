@@ -1,40 +1,23 @@
 "use client";
 
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Slide,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Button, useMediaQuery } from "@mui/material";
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { type ReactElement, type Ref, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { type IFullCombination } from "~/models/ICombination";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
 import WheelWithArrow from "public/images/RouletteBoard.png";
-import { ShowCombo } from "../Combination/ShowCombo";
 import { SpinningWheel } from "./SpinningWheel";
 import { defaultCombo } from "~/models/DefaultObject";
 import { theme } from "~/styles/theme/theme";
-import { type TransitionProps } from "@mui/material/transitions";
 import React from "react";
-import { SpinnerTitle } from "./SpinnerTitle";
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    children: ReactElement<any, any>;
-  },
-  ref: Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import { buttonSpinnerStyle } from "~/styles/buttonStyle";
+import { RouletteBoardTitle } from "./RouletteBoardTitle";
+import { ComboTitle } from "./Combo/ComboTitle";
+import { ChipResult } from "./Combo/ChipResult";
+import { DipResult } from "./Combo/DipResult";
+import { SaveCombo } from "./Combo/SaveCombo";
 
 export const RouletteBoard = () => {
   const mediumWindow = useMediaQuery(theme.breakpoints.up("sm"));
@@ -98,64 +81,78 @@ export const RouletteBoard = () => {
 
   return (
     <>
-      <SpinnerTitle />
-      <Box sx={{ display: "flex", position: "relative" }} onClick={getCombo}>
+      <Box
+        sx={{
+          display: "flex",
+          position: "relative",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+          pt: 2,
+        }}
+      >
         <SpinningWheel spinning={spinning} isSpinning={setSpinning} />
         <Image
           src={WheelWithArrow}
           width={windowSize}
           alt="Spinner Wheel Frame"
           style={{ position: "absolute" }}
+          onClick={getCombo}
         />
+        <RouletteBoardTitle />
       </Box>
 
-      {combo && !spinning && (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            mt: 2,
-            backgroundColor: "whitesmoke",
-          }}
-        >
-          <ShowCombo combo={combo} />
-          {session && (
-            <>
-              <Button
-                onClick={() => saveResult(combo.id)}
-                disabled={resFromTRPC}
-              >
-                Save Result
-              </Button>
-            </>
-          )}
-        </Box>
-      )}
-
-      <Dialog
-        open={openSave}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={() => setOpenSave(!openSave)}
-        aria-describedby="alert-dialog-slide-description"
+      <Box
         sx={{
-          backdropFilter: "none",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: session ? "450px" : "400px",
+          mb: 5,
         }}
       >
-        <DialogTitle>{"This combo is saved!!!"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            You have saved this combination and can check it out and rate it on
-            your pages!
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenSave(!openSave)}>Ok, nice!</Button>
-        </DialogActions>
-      </Dialog>
+        {combo && !spinning && (
+          <>
+            <ComboTitle comboName={combo.name} />
+            <Box
+              sx={{
+                display: "flex",
+                width: "100%",
+                height: "300px",
+                position: "relative",
+              }}
+            >
+              <DipResult dip={combo.dip} />
+              <ChipResult chip={combo.chip} />
+              {session && combo && (
+                <Box
+                  sx={{
+                    width: "140px",
+                    position: "absolute",
+                    bottom: 0,
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                  }}
+                >
+                  <Button
+                    color="inherit"
+                    onClick={() => saveResult(combo.id)}
+                    disabled={resFromTRPC}
+                    sx={buttonSpinnerStyle}
+                  >
+                    Save Result
+                  </Button>
+                </Box>
+              )}
+            </Box>
+          </>
+        )}
+      </Box>
+
+      {/* Dialog for saving combo */}
+      <SaveCombo isOpen={openSave} isDialogOpen={setOpenSave} />
     </>
   );
 };
