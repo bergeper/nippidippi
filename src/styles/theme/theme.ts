@@ -38,6 +38,7 @@ export const theme = createTheme({
     custom: {
       custom:
         "linear-gradient(rgba(238, 227, 172, 0.9), rgba(238, 227, 172, 0.9))",
+      bg: "rgb(238, 227, 172)",
     },
   },
 });
@@ -50,6 +51,7 @@ declare module "@mui/material/styles" {
     };
     custom: {
       custom: string;
+      bg: string;
     };
   }
   interface PaletteOptions {
@@ -59,6 +61,7 @@ declare module "@mui/material/styles" {
     };
     custom: {
       custom: string;
+      bg: string;
     };
   }
 }
