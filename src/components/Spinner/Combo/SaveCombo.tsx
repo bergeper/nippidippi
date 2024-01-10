@@ -15,6 +15,7 @@ import {
 } from "react";
 import { type TransitionProps } from "@mui/material/transitions";
 import React from "react";
+import { theme } from "~/styles/theme/theme";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -38,19 +39,17 @@ export const SaveCombo = ({ isOpen, isDialogOpen }: Props) => {
       TransitionComponent={Transition}
       keepMounted
       onClose={() => isDialogOpen(false)}
-      aria-describedby="alert-dialog-slide-description"
-      sx={{
-        backdropFilter: "none",
-      }}
     >
-      <DialogTitle>{"This combo is saved!!!"}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-slide-description">
+      <DialogTitle sx={{ background: theme.palette.custom.bg }}>
+        {"This combo is saved!!!"}
+      </DialogTitle>
+      <DialogContent sx={{ background: theme.palette.custom.bg }}>
+        <DialogContentText>
           You have saved this combination and can check it out and rate it on
           your pages!
         </DialogContentText>
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{ background: theme.palette.custom.bg }}>
         <Button onClick={() => isDialogOpen(false)}>Ok, nice!</Button>
       </DialogActions>
     </Dialog>
