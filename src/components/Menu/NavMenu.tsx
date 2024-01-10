@@ -50,7 +50,7 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
             onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
           >
-            <List id="design-main-menu">
+            <List id="main-menu">
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <IconButton
                   color="inherit"
@@ -61,33 +61,33 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                   <CloseIcon />
                 </IconButton>
               </Box>
-              <Link id="home" color="textSecondary" href="/">
-                <ListItem disablePadding sx={{ p: 0.5 }}>
+              <Link id="home" color="inherit" href="/">
+                <ListItem sx={{ p: 0.5 }}>
                   <ListItemButton sx={{ p: 0.5 }}>
                     <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
                     <ListItemText primary="Home" sx={{ p: 0.5 }} />
                   </ListItemButton>
                 </ListItem>
               </Link>
-              <Link id="spinner" color="textSecondary" href="/spinner">
-                <ListItem disablePadding sx={{ p: 0.5 }}>
+              <Link id="spinner" color="inherit" href="/spinner">
+                <ListItem sx={{ p: 0.5 }}>
                   <ListItemButton sx={{ p: 0.5 }}>
                     <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
                     <ListItemText primary="NippiDippi Wheel" sx={{ p: 0.5 }} />
                   </ListItemButton>
                 </ListItem>
               </Link>
-              <Link id="toplist" color="textSecondary" href="/toplist">
-                <ListItem disablePadding sx={{ p: 0.5 }}>
+              <Link id="toplist" color="inherit" href="/toplist">
+                <ListItem sx={{ p: 0.5 }}>
                   <ListItemButton sx={{ p: 0.5 }}>
                     <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
-                    <ListItemText primary="Top-List" sx={{ p: 0.5 }} />
+                    <ListItemText primary="Toplist" sx={{ p: 0.5 }} />
                   </ListItemButton>
                 </ListItem>
               </Link>
               {session && (
-                <Link id="my-pages" color="textSecondary" href="/my-pages">
-                  <ListItem disablePadding sx={{ p: 0.5 }}>
+                <Link id="my-pages" color="inherit" href="/my-pages">
+                  <ListItem sx={{ p: 0.5 }}>
                     <ListItemButton sx={{ p: 0.5 }}>
                       <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
                       <ListItemText primary="My Pages" sx={{ p: 0.5 }} />
@@ -102,3 +102,19 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
     </>
   );
 };
+
+/*
+<ListItemButton
+                sx={{
+                  ...listItemButtonStyle,
+                  backgroundColor: pathname.includes("dashboard")
+                    ? "#d3dce6"
+                    : theme.palette.common.white,
+                }}
+              >
+                <ListItemIcon sx={listItemIconStyle}>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" sx={listItemTextStyle} />
+              </ListItemButton>
+*/
