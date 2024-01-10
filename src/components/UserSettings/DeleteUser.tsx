@@ -60,6 +60,7 @@ export const DeleteUser = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        mb: 5,
       }}
     >
       <Box
