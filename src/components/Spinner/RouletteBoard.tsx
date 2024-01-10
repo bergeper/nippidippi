@@ -52,10 +52,9 @@ export const RouletteBoard = () => {
         if (!spinning) {
           if (response) {
             setCombo(response);
-            setSpinning(false);
           }
         }
-      }, 3000);
+      }, 2000);
     } else {
       const response = await trpcApi.combination.getRandomCombo.query();
       setTimeout(() => {
@@ -81,6 +80,7 @@ export const RouletteBoard = () => {
 
   return (
     <>
+      <RouletteBoardTitle />
       <Box
         sx={{
           display: "flex",
@@ -99,7 +99,6 @@ export const RouletteBoard = () => {
           style={{ position: "absolute" }}
           onClick={getCombo}
         />
-        <RouletteBoardTitle />
       </Box>
 
       <Box
@@ -109,7 +108,7 @@ export const RouletteBoard = () => {
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
-          height: session ? "450px" : "400px",
+          height: session ? "390px" : "380px",
           mb: 5,
         }}
       >
@@ -126,7 +125,7 @@ export const RouletteBoard = () => {
             >
               <DipResult dip={combo.dip} />
               <ChipResult chip={combo.chip} />
-              {session && combo && (
+              {session && !spinning && (
                 <Box
                   sx={{
                     width: "140px",
