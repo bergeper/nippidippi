@@ -7,11 +7,12 @@ export const RouletteBoardTitle = () => {
       component="section"
       sx={{
         width: "100%",
+        // position: "absolute",
         display: "flex",
         flexDirection: "column",
         background: theme.palette.custom.custom,
-        py: 1,
-        mt: -1,
+        pt: 2,
+        // mt: -1,
         [theme.breakpoints.up("sm")]: {
           px: 4,
           height: "auto",
@@ -38,7 +39,7 @@ export const RouletteBoardTitle = () => {
           },
         }}
       >
-        Press the wheel and see what you get!
+        Give the wheel a push! (press it)
       </Typography>
     </Box>
   );
