@@ -12,6 +12,7 @@ export const FooterContentHolder = () => {
       sx={{
         width: "100%",
         background: "#EEE3AC",
+        borderTop: "2px solid black",
         b: 0,
         pt: 2,
         pb: 1,

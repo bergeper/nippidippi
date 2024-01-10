@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { homepageCopy } from "~/texts/texts";
 import { LinkBox } from "~/components/StartPage/LinkBox";
+import { buttonHomePageStyle } from "~/styles/buttonStyle";
 
 export default function HomePage() {
   const mediumWindow = useMediaQuery(theme.breakpoints.up("sm"));
@@ -65,35 +66,7 @@ export default function HomePage() {
             position: "relative",
           }}
         >
-          <Button
-            color="inherit"
-            sx={{
-              position: "absolute",
-              right: 0,
-              top: 60,
-              rotate: "30deg",
-              background: "#EEE3AC",
-              border: "2px solid black",
-              display: "inline-block",
-              padding: "10px 20px",
-              borderRadius: "25px", // Adjust the value as needed
-              fontSize: "1rem",
-              ":hover": {
-                background: "white",
-              },
-              ":active": {
-                background: "white",
-              },
-              [theme.breakpoints.up("md")]: {
-                right: 40,
-                top: 100,
-                ":hover": {
-                  scale: "1.1",
-                },
-              },
-            }}
-            href="/spinner"
-          >
+          <Button color="inherit" sx={buttonHomePageStyle} href="/spinner">
             NippiDippi Wheel
           </Button>
           <Image
