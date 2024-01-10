@@ -42,7 +42,7 @@ export const SpinningWheel = ({ spinning, isSpinning }: Props) => {
         if (spinning) {
           isSpinning(false);
         }
-      }, 2000);
+      }, 4000);
 
       return () => {
         clearTimeout(timeoutId);
@@ -53,7 +53,7 @@ export const SpinningWheel = ({ spinning, isSpinning }: Props) => {
   return (
     <SpinningWheelContainer
       style={{
-        transform: spinning ? `rotate(${2880}deg)` : "",
+        transform: spinning ? `rotate(${2880}deg)` : "rotate(0)deg",
       }}
     >
       <Image
