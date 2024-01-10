@@ -71,15 +71,25 @@ export default function HomePage() {
               position: "absolute",
               right: 0,
               top: 60,
-              rotate: "25deg",
+              rotate: "30deg",
+              background: "#EEE3AC",
+              border: "2px solid black",
               display: "inline-block",
               padding: "10px 20px",
-              background: "white",
               borderRadius: "25px", // Adjust the value as needed
               fontSize: "1rem",
+              ":hover": {
+                background: "white",
+              },
+              ":active": {
+                background: "white",
+              },
               [theme.breakpoints.up("md")]: {
                 right: 40,
                 top: 100,
+                ":hover": {
+                  scale: "1.1",
+                },
               },
             }}
             href="/spinner"
