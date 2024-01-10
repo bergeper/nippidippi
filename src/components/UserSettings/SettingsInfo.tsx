@@ -35,7 +35,7 @@ export const SettingsInfo = () => {
         <Typography color="inherit" variant="h4" sx={{ fontSize: "1.225rem" }}>
           The only thing you can do here is delete your account. But keep in
           mind, if you delete your account. All of your ratings and data will be
-          lost forever.
+          lost... forever...
         </Typography>
       </Box>
     </>
