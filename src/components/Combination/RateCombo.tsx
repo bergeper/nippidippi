@@ -13,7 +13,8 @@ import {
   InputLabel,
   Box,
 } from "@mui/material";
-import { type Dispatch, type SetStateAction, useState } from "react";
+import { useRouter } from "next/navigation";
+import { type Dispatch, type SetStateAction, useState, useEffect } from "react";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
 import { theme } from "~/styles/theme/theme";
 
@@ -24,7 +25,9 @@ interface Props {
 }
 
 export const RateCombo = ({ comboId, isOpen, isDialogOpen }: Props) => {
+  const router = useRouter();
   const [rating, setRating] = useState<string>("");
+  const [refresh, setRefresh] = useState<boolean>();
 
   const handleSetRating = (event: SelectChangeEvent) => {
     setRating(event.target.value);
@@ -35,8 +38,16 @@ export const RateCombo = ({ comboId, isOpen, isDialogOpen }: Props) => {
       rating: +rating,
       comboId: comboId,
     });
-    console.log(rating, " ", comboId);
+    setRefresh(true);
   };
+
+  useEffect(() => {
+    if (refresh) {
+      setRefresh(false);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      router.refresh();
+    }
+  }, [refresh]);
 
   return (
     <>
