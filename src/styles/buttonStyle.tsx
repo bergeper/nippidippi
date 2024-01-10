@@ -1,12 +1,13 @@
 import { theme } from "./theme/theme";
 
-export const buttonStyle = {
+export const buttonSpinnerStyle = {
   background: "#EEE3AC",
   border: "2px solid black",
   display: "inline-block",
-  padding: "10px 20px",
+  padding: "5px 20px",
+  width: "140px",
   borderRadius: "25px",
-  fontSize: "1rem",
+  fontSize: "0.9rem",
   ":hover": {
     background: "white",
   },
