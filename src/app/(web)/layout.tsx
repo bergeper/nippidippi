@@ -39,8 +39,14 @@ export default function HomeLayout({ children }: PropsWithChildren) {
   };
   return (
     <>
-      <AppBar color="inherit" position="static" sx={{ background: " #EEE3AC" }}>
-        <Toolbar>
+      <AppBar
+        color="inherit"
+        position="static"
+        sx={{
+          background: "#EEE3AC",
+        }}
+      >
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -53,7 +59,11 @@ export default function HomeLayout({ children }: PropsWithChildren) {
             <MenuIcon />
           </IconButton>
 
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, textAlign: "center" }}
+          >
             NippiDippi
           </Typography>
 
@@ -85,33 +95,50 @@ export default function HomeLayout({ children }: PropsWithChildren) {
             >
               {status === "authenticated" && (
                 <MenuList>
-                  <Link id="my-pages" color="textSecondary" href="/my-pages">
-                    <MenuItem href="/my-pages" onClick={handleClose}>
+                  <Link
+                    id="my-pages"
+                    href="/my-pages"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <MenuItem
+                      href="/my-pages"
+                      onClick={handleClose}
+                      sx={{ color: "black" }}
+                    >
                       My Pages
                     </MenuItem>
                   </Link>
                   <Link
                     id="settings"
-                    color="textSecondary"
+                    style={{ textDecoration: "none" }}
                     href="/my-pages/settings"
                   >
-                    <MenuItem onClick={handleClose} href="/my-pages/settings">
+                    <MenuItem onClick={handleClose} sx={{ color: "black" }}>
                       Settings
                     </MenuItem>
                   </Link>
                   <Link
                     id="results"
-                    color="textSecondary"
                     href="/my-pages/results"
+                    style={{ textDecoration: "none" }}
                   >
-                    <MenuItem onClick={handleClose} href="/my-pages/results">
+                    <MenuItem
+                      onClick={handleClose}
+                      href="/my-pages/results"
+                      sx={{ color: "black" }}
+                    >
                       Results
                     </MenuItem>
                   </Link>
                 </MenuList>
               )}
-              <Link href={session ? "/api/auth/signout" : "/api/auth/signin"}>
-                {session ? "Sign out" : "Sign in"}
+              <Link
+                href={session ? "/api/auth/signout" : "/api/auth/signin"}
+                style={{ textDecoration: "none" }}
+              >
+                <MenuItem sx={{ color: "black" }}>
+                  {session ? "Sign out" : "Sign in"}
+                </MenuItem>
               </Link>
             </Menu>
           </Box>
