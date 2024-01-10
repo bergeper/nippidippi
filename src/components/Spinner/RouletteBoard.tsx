@@ -4,7 +4,7 @@ import { Box, Button, useMediaQuery } from "@mui/material";
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { type IFullCombination } from "~/models/ICombination";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
 import WheelWithArrow from "public/images/RouletteBoard.png";
@@ -22,6 +22,7 @@ import { SaveCombo } from "./Combo/SaveCombo";
 export const RouletteBoard = () => {
   const mediumWindow = useMediaQuery(theme.breakpoints.up("sm"));
   const largeWindow = useMediaQuery(theme.breakpoints.up("md"));
+  const target = useRef<HTMLImageElement | null>(null);
   const [openSave, setOpenSave] = useState(false);
   const [windowSize, setWindowSize] = useState<number>(200);
   const [spinning, setSpinning] = useState<boolean>(false);
@@ -45,6 +46,9 @@ export const RouletteBoard = () => {
     setCombo(defaultCombo);
     setSpinning(true);
     setResFromTRPC(false);
+    if (target.current && !mediumWindow && !largeWindow) {
+      target.current.scrollIntoView({ behavior: "smooth" });
+    }
     if (session) {
       const response =
         await trpcApi.combination.getRandomComboIfLoggedIn.query();
@@ -63,7 +67,6 @@ export const RouletteBoard = () => {
         }
       }, 2000);
     }
-    // setSpinning(false);
   };
 
   const saveResult = async (id: string) => {
@@ -98,6 +101,7 @@ export const RouletteBoard = () => {
           alt="Spinner Wheel Frame"
           style={{ position: "absolute" }}
           onClick={getCombo}
+          ref={target}
         />
       </Box>
 
@@ -108,7 +112,13 @@ export const RouletteBoard = () => {
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
-          height: session ? "390px" : "380px",
+          height: session ? "390px" : "390px",
+          [theme.breakpoints.up("sm")]: {
+            height: "500px",
+          },
+          [theme.breakpoints.up("md")]: {
+            height: "700px",
+          },
           mb: 5,
         }}
       >
@@ -118,9 +128,21 @@ export const RouletteBoard = () => {
             <Box
               sx={{
                 display: "flex",
-                width: "100%",
+                width: "330px",
                 height: "300px",
                 position: "relative",
+                [theme.breakpoints.up("sm")]: {
+                  height: "500px",
+                  width: "530px",
+                },
+                [theme.breakpoints.up("md")]: {
+                  height: "700px",
+                  width: "680px",
+                },
+                [theme.breakpoints.up("lg")]: {
+                  height: "700px",
+                  width: "680px",
+                },
               }}
             >
               <DipResult dip={combo.dip} />
