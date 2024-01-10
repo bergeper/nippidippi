@@ -1,6 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
+import { Suspense } from "react";
 import { RouletteBoard } from "~/components/Spinner/RouletteBoard";
 import { theme } from "~/styles/theme/theme";
 
@@ -29,7 +30,9 @@ export default function SpinnerPage() {
             },
           }}
         >
-          <RouletteBoard />
+          <Suspense>
+            <RouletteBoard />
+          </Suspense>
         </Box>
       </Box>
     </>
