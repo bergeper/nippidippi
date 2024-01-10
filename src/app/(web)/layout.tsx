@@ -19,6 +19,7 @@ import { NavMenu } from "~/components/Menu/NavMenu";
 import Link from "next/link";
 import rainingChips from "public/images/rainingChips.jpg";
 import { theme } from "~/styles/theme/theme";
+import { FooterContentHolder } from "~/components/Footer/FooterContentHolder";
 
 export default function HomeLayout({ children }: PropsWithChildren) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -124,7 +125,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
         component="main"
         sx={{
           minWidth: 360,
-          minHeight: "100vh",
+          maxHeight: "2000px",
           backgroundImage: `${ImgOverlay}, url(${rainingChips.src})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -139,17 +140,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
       >
         {children}
       </Box>
-      <Box
-        component="footer"
-        sx={{
-          height: "40px",
-          width: "100%",
-          background: "#EEE3AC",
-          b: 0,
-        }}
-      >
-        Footen
-      </Box>
+      <FooterContentHolder />
     </>
   );
 }
