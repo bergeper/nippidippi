@@ -120,7 +120,7 @@ export default function HomePage() {
         >
           Welcome to NippiDippi
         </Typography>
-        <Typography color="inherit" variant="h1" sx={{ fontSize: "1.225rem" }}>
+        <Typography color="inherit" variant="h4" sx={{ fontSize: "1.225rem" }}>
           Welcome to Chip and Dip Roulette, where flavor meets chance! Meet
           "Nippi," the culinary genius crafting unforgettable chip and dip
           combos. For the indecisive snacker, Nippi curates solid choices,

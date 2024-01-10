@@ -123,7 +123,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
       <Box
         component="main"
         sx={{
-          width: "auto",
+          minWidth: 360,
           minHeight: "100vh",
           backgroundImage: `${ImgOverlay}, url(${rainingChips.src})`,
           backgroundSize: "cover",
@@ -131,12 +131,9 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           backgroundRepeat: "no-repeat",
           display: "flex",
           flexDirection: "column",
-          // justifyContent: "center",
           alignItems: "center",
           [theme.breakpoints.down("sm")]: {
-            minHeight: "auto",
-            flexDirection: "column-reverse",
-            justifyContent: "space-between",
+            flexDirection: "column",
           },
         }}
       >

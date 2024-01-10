@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import { type ICombination } from "~/models/ICombination";
 import Image from "next/image";
+import { type IFullCombination } from "~/models/ICombination";
 
 interface Props {
-  combo: ICombination;
+  combo: IFullCombination;
 }
 
 export const ShowCombo = ({ combo }: Props) => {
