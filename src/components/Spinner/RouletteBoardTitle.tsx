@@ -6,14 +6,13 @@ export const RouletteBoardTitle = () => {
     <Box
       component="section"
       sx={{
-        width: "auto",
+        width: "100%",
         display: "flex",
         flexDirection: "column",
         background: theme.palette.custom.custom,
-        py: 2,
-        px: 2,
+        py: 1,
+        mt: -1,
         [theme.breakpoints.up("sm")]: {
-          mt: 5,
           px: 4,
           height: "auto",
           alignContent: "center",
@@ -29,7 +28,15 @@ export const RouletteBoardTitle = () => {
       <Typography
         color="inherit"
         variant="h1"
-        sx={{ fontSize: "1.3rem", textAlign: "center", pt: 2, pb: 2 }}
+        sx={{
+          fontSize: "0.9rem",
+          fontWeight: "bold",
+          textAlign: "center",
+          py: 1,
+          [theme.breakpoints.up("sm")]: {
+            fontSize: "1.3rem",
+          },
+        }}
       >
         Press the wheel and see what you get!
       </Typography>
