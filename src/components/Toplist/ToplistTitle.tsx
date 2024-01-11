@@ -15,7 +15,7 @@ export const ToplistTitle = () => {
           flexDirection: "column",
           background: theme.palette.custom.custom,
           pt: 2,
-          // mt: -1,
+          mb: 2,
           [theme.breakpoints.up("sm")]: {
             px: 4,
             my: 10,
