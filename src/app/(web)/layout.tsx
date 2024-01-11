@@ -49,6 +49,26 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           background: "#EEE3AC",
         }}
       >
+        {/* Scrollbar styling */}
+        <style jsx global>{`
+          body::-webkit-scrollbar {
+            width: 10px;
+          }
+
+          body::-webkit-scrollbar-thumb {
+            background-color: #000000;
+            border-radius: 4px;
+          }
+
+          body::-webkit-scrollbar-track {
+            background-color: #eee3ac;
+          }
+
+          body {
+            scrollbar-width: thin;
+            scrollbar-color: #000000 #eee3ac;
+          }
+        `}</style>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <IconButton
             color="inherit"
@@ -70,6 +90,8 @@ export default function HomeLayout({ children }: PropsWithChildren) {
               alignItems: "center",
               justifyContent: "center",
               width: "auto",
+              color: "black",
+              textDecoration: "none",
             }}
           >
             <Typography
@@ -83,13 +105,15 @@ export default function HomeLayout({ children }: PropsWithChildren) {
             >
               Nippi
             </Typography>
-            <Image
-              src={np.src}
-              width={40}
-              height={40}
-              style={{ height: "auto" }}
-              alt="NippiDippi"
-            />
+            <Link href="/">
+              <Image
+                src={np.src}
+                width={40}
+                height={40}
+                style={{ height: "auto" }}
+                alt="NippiDippi"
+              />
+            </Link>
             <Typography
               variant="h6"
               sx={{

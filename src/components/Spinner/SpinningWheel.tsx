@@ -12,8 +12,17 @@ const spin = keyframes`
     transform: rotate(0deg);
     scale: 1;
   }
-  50%{
+  20%{
     scale: 1.125;
+  }
+  40%{
+    scale: 1.05;
+  }
+  60%{
+    scale: 1.125;
+  }
+  80%{
+    scale: 1;
   }
   100%{
     transform: rotate(2880deg);

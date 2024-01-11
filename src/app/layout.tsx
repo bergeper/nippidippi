@@ -16,7 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Box component="body" sx={{ margin: 0 }}>
+      <Box
+        component="body"
+        sx={{
+          margin: 0,
+        }}
+      >
         <AuthSessionProvider>
           <MuiThemeProvider>
             <TRPCProvider>{children}</TRPCProvider>
