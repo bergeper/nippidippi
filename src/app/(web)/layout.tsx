@@ -49,6 +49,26 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           background: "#EEE3AC",
         }}
       >
+        {/* Scrollbar styling */}
+        <style jsx global>{`
+          body::-webkit-scrollbar {
+            width: 10px;
+          }
+
+          body::-webkit-scrollbar-thumb {
+            background-color: #000000;
+            border-radius: 4px;
+          }
+
+          body::-webkit-scrollbar-track {
+            background-color: #eee3ac;
+          }
+
+          body {
+            scrollbar-width: thin;
+            scrollbar-color: #000000 #eee3ac;
+          }
+        `}</style>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <IconButton
             color="inherit"
