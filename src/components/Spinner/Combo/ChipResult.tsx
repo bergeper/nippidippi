@@ -103,7 +103,7 @@ export const ChipResult = ({ chip }: Props) => {
               style={{
                 height: "auto",
               }}
-              alt={"auto"}
+              alt={chip.name + " - " + chip.flavor}
             />
           ) : (
             " "
