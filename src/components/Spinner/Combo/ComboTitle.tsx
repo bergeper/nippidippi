@@ -14,6 +14,7 @@ export const ComboTitle = ({ comboName }: Props) => {
       style={{ transitionDelay: `${1000}ms` }}
     >
       <Box
+        cy-test-id="combo-title"
         sx={{
           display: "flex",
           flexDirection: "column",

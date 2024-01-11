@@ -25,6 +25,7 @@ export default function HomePage() {
   return (
     <Box
       component="section"
+      cy-test-id="home-page"
       sx={{
         display: "flex",
         width: "100%",

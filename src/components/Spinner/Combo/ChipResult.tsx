@@ -37,7 +37,7 @@ export const ChipResult = ({ chip }: Props) => {
   const splittedText = chip.flavor.split("&");
   return (
     <Grow
-      data-testid="chip-result"
+      cy-test-id="chip-result"
       in={!!chip}
       mountOnEnter
       unmountOnExit

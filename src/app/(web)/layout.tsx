@@ -52,7 +52,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <IconButton
             color="inherit"
-            aria-label="open drawer"
+            aria-label="Open drawer"
             onClick={() => setIsMainMenuOpen(!isMainMenuOpen)}
             edge="start"
             sx={{

@@ -6,7 +6,12 @@ import { Contact } from "~/components/About/Contact";
 export default async function AboutPage() {
   return (
     <>
-      <Grid container display={"flex"} justifyContent={"center"}>
+      <Grid
+        container
+        display={"flex"}
+        justifyContent={"center"}
+        cy-test-id="about-page"
+      >
         <Grid
           item
           xs={12}

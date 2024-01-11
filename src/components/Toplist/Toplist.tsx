@@ -14,6 +14,7 @@ export const Toplist = ({ combos }: Props) => {
   return (
     <Box
       component="section"
+      cy-test-id="toplist-container"
       sx={{
         height: "100%",
         width: "100%",
