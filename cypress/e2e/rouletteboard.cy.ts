@@ -14,12 +14,12 @@ describe("RouletteBoard Component", () => {
     cy.get('img[cy-test-id="get-result"]').click();
 
     // API
-    cy.wait("@getCombo").then((interception) => {
-      expect(interception.response).to.not.be.null;
-      expect(interception.response).to.not.be.undefined;
-      expect(interception.response?.statusCode).to.equal(200);
+    cy.wait("@getCombo").then((data) => {
+      expect(data.response).to.not.be.null;
+      expect(data.response).to.not.be.undefined;
+      expect(data.response?.statusCode).to.equal(200);
 
-      const combo = interception.response?.body?.result;
+      const combo = data.response?.body?.result;
 
       if (combo) {
         expect(combo).to.have.property("id").and.to.be.a("string");
