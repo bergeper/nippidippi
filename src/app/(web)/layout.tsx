@@ -82,9 +82,9 @@ export default function HomeLayout({ children }: PropsWithChildren) {
             <MenuIcon />
           </IconButton>
 
-          <Link
-            href="/"
-            style={{
+          <Box
+            component="div"
+            sx={{
               textAlign: "center",
               display: "flex",
               alignItems: "center",
@@ -105,13 +105,15 @@ export default function HomeLayout({ children }: PropsWithChildren) {
             >
               Nippi
             </Typography>
-            <Image
-              src={np.src}
-              width={40}
-              height={40}
-              style={{ height: "auto" }}
-              alt="NippiDippi"
-            />
+            <Link href="/">
+              <Image
+                src={np.src}
+                width={40}
+                height={40}
+                style={{ height: "auto" }}
+                alt="NippiDippi"
+              />
+            </Link>
             <Typography
               variant="h6"
               sx={{
@@ -123,7 +125,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
             >
               Dippi
             </Typography>
-          </Link>
+          </Box>
 
           <Box>
             <IconButton
