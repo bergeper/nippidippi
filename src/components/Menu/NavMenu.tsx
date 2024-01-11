@@ -13,6 +13,11 @@ import {
 import Link from "next/link";
 import React, { type Dispatch, type SetStateAction } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import AutoModeIcon from "@mui/icons-material/AutoMode";
+import PersonIcon from "@mui/icons-material/Person";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
+
+import HomeIcon from "@mui/icons-material/Home";
 import { useSession } from "next-auth/react";
 import { theme } from "~/styles/theme/theme";
 
@@ -45,15 +50,14 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
               flexDirection: "column",
               justifyContent: "space-between",
               height: "100vh",
-              background: theme.palette.primary.main,
+              background: theme.palette.custom.custom,
             }}
             onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
           >
-            <List id="design-main-menu">
+            <List id="main-menu">
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <IconButton
-                  color="inherit"
                   aria-label="close drawer"
                   onClick={() => toggleDrawer(false)}
                   edge="start"
@@ -61,47 +65,103 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                   <CloseIcon />
                 </IconButton>
               </Box>
-              <Link id="home" color="textSecondary" href="/">
-                <ListItem disablePadding sx={{ p: 0.5 }}>
+              <ListItem sx={{ p: 0.5 }}>
+                <Link id="home" href="/" style={{ textDecoration: "none" }}>
                   <ListItemButton sx={{ p: 0.5 }}>
-                    <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
-                    <ListItemText primary="Home" sx={{ p: 0.5 }} />
+                    <ListItemIcon
+                      sx={{
+                        display: "flex",
+                        minWidth: 0,
+                        mr: "auto",
+                        alignItems: "center",
+                        gap: 2,
+                      }}
+                    >
+                      <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Home"
+                      sx={{ p: 0.5, color: "black" }}
+                    />
                   </ListItemButton>
-                </ListItem>
-              </Link>
-              <Link id="spinner" color="textSecondary" href="/spinner">
-                <ListItem disablePadding sx={{ p: 0.5 }}>
-                  <ListItemButton sx={{ p: 0.5 }}>
-                    <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
-                    <ListItemText primary="NippiDippi Wheel" sx={{ p: 0.5 }} />
-                  </ListItemButton>
-                </ListItem>
-              </Link>
-              <Link id="toplist" color="textSecondary" href="/toplist">
-                <ListItem disablePadding sx={{ p: 0.5 }}>
-                  <ListItemButton sx={{ p: 0.5 }}>
-                    <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
-                    <ListItemText primary="Top-List" sx={{ p: 0.5 }} />
-                  </ListItemButton>
-                </ListItem>
-              </Link>
-              <Link id="about" color="textSecondary" href="/about">
-                <ListItem disablePadding sx={{ p: 0.5 }}>
-                  <ListItemButton sx={{ p: 0.5 }}>
-                    <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
-                    <ListItemText primary="About" sx={{ p: 0.5 }} />
-                  </ListItemButton>
-                </ListItem>
-              </Link>
-              {session && (
-                <Link id="my-pages" color="textSecondary" href="/my-pages">
-                  <ListItem disablePadding sx={{ p: 0.5 }}>
-                    <ListItemButton sx={{ p: 0.5 }}>
-                      <ListItemIcon sx={{ p: 0.5 }}></ListItemIcon>
-                      <ListItemText primary="My Pages" sx={{ p: 0.5 }} />
-                    </ListItemButton>
-                  </ListItem>
                 </Link>
+              </ListItem>
+              <ListItem sx={{ p: 0.5 }}>
+                <Link
+                  id="spinner"
+                  href="/spinner"
+                  style={{ textDecoration: "none" }}
+                >
+                  <ListItemButton sx={{ p: 0.5 }}>
+                    <ListItemIcon
+                      sx={{
+                        display: "flex",
+                        minWidth: 0,
+                        mr: "auto",
+                        alignItems: "center",
+                        gap: 2,
+                      }}
+                    >
+                      <AutoModeIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="NippiDippi Wheel"
+                      sx={{ p: 0.5, color: "black" }}
+                    />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+              <ListItem sx={{ p: 0.5 }}>
+                <Link
+                  id="toplist"
+                  href="/toplist"
+                  style={{ textDecoration: "none" }}
+                >
+                  <ListItemButton sx={{ p: 0.5 }}>
+                    <ListItemIcon
+                      sx={{
+                        display: "flex",
+                        minWidth: 0,
+                        mr: "auto",
+                        alignItems: "center",
+                        gap: 2,
+                      }}
+                    >
+                      <FormatListNumberedIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Toplist"
+                      sx={{ p: 0.5, color: "black" }}
+                    />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+              {session && (
+                <ListItem sx={{ p: 0.5 }}>
+                  <Link
+                    id="my-pages"
+                    href="/my-pages"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <ListItemButton sx={{ p: 0.5 }}>
+                      <ListItemIcon
+                        sx={{
+                          display: "flex",
+                          minWidth: 0,
+                          mr: "auto",
+                          alignItems: "center",
+                          gap: 2,
+                        }}
+                      >
+                        <PersonIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="My Pages"
+                        sx={{ p: 0.5, color: "black" }}
+                      />
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
               )}
             </List>
           </Box>

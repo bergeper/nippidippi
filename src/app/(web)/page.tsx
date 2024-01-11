@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { homepageCopy } from "~/texts/texts";
 import { LinkBox } from "~/components/StartPage/LinkBox";
+import { buttonHomePageStyle } from "~/styles/buttonStyle";
 
 export default function HomePage() {
   const mediumWindow = useMediaQuery(theme.breakpoints.up("sm"));
@@ -65,25 +66,7 @@ export default function HomePage() {
             position: "relative",
           }}
         >
-          <Button
-            color="inherit"
-            sx={{
-              position: "absolute",
-              right: 0,
-              top: 60,
-              rotate: "25deg",
-              display: "inline-block",
-              padding: "10px 20px",
-              background: "white",
-              borderRadius: "25px", // Adjust the value as needed
-              fontSize: "1rem",
-              [theme.breakpoints.up("md")]: {
-                right: 40,
-                top: 100,
-              },
-            }}
-            href="/spinner"
-          >
+          <Button color="inherit" sx={buttonHomePageStyle} href="/spinner">
             NippiDippi Wheel
           </Button>
           <Image
@@ -120,7 +103,11 @@ export default function HomePage() {
         >
           Welcome to NippiDippi
         </Typography>
-        <Typography color="inherit" variant="h1" sx={{ fontSize: "1.225rem" }}>
+        <Typography
+          color="inherit"
+          variant="h4"
+          sx={{ fontSize: "1rem", px: 2 }}
+        >
           Welcome to Chip and Dip Roulette, where flavor meets chance! Meet
           "Nippi," the culinary genius crafting unforgettable chip and dip
           combos. For the indecisive snacker, Nippi curates solid choices,

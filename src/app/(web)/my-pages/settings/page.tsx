@@ -1,22 +1,23 @@
-import { Box, Typography } from "@mui/material";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { authOptions } from "~/app/api/auth/[...nextauth]/options";
-import { ChangePassword } from "~/components/UserSettings/ChangePassword";
+import { DeleteUser } from "~/components/UserSettings/DeleteUser";
+import { SettingsInfo } from "~/components/UserSettings/SettingsInfo";
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
 
-  // Change to a better reroute
+  // Change to delete account.
   if (!session) {
     redirect("/");
   }
 
-  return (
-    <Box>
-      <Typography>Settings</Typography>
-      <Typography>Do you want to change your password?</Typography>
-      <ChangePassword />
-    </Box>
-  );
+  if (session) {
+    return (
+      <>
+        <SettingsInfo />
+        <DeleteUser />
+      </>
+    );
+  }
 }

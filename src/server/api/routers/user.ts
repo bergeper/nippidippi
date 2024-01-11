@@ -8,6 +8,10 @@ const createUserInput = z.object({
   email: z.string(),
   password: z.string(),
 });
+const deleteUserInput = z.object({
+  username: z.string(),
+  email: z.string(),
+});
 
 const passwordInput = z.object({
   password: z.string(),
@@ -43,4 +47,53 @@ export const userRouter = router({
       });
       return updatePass;
     }),
+  checkUser: loggedInProcedure.input(deleteUserInput).mutation(async (opts) => {
+    const { ctx, input } = opts;
+    const findUser = await ctx.db.user.findFirst({
+      where: {
+        name: input.username,
+        email: input.email,
+      },
+    });
+
+    return {
+      userInfoCorrect: !!findUser,
+    };
+  }),
+  deleteUser: loggedInProcedure.query(async (opts) => {
+    const { ctx } = opts;
+    const resRating = await ctx.db.rating.deleteMany({
+      where: {
+        user: { id: ctx.session.user.id },
+      },
+    });
+
+    if (!resRating) {
+      console.log("SOMETHING WENT WRONG⚠️⚠️⚠️⚠️⚠️");
+    }
+
+    const resTC = await ctx.db.triedCombination.deleteMany({
+      where: {
+        user: { id: ctx.session.user.id },
+      },
+    });
+
+    if (!resTC) {
+      console.log("SOMETHING WENT WRONG⚠️⚠️⚠️⚠️⚠️ Tried Combos");
+    }
+
+    const resUser = await ctx.db.user.delete({
+      where: {
+        id: ctx.session.user.id,
+      },
+    });
+
+    if (!resUser) {
+      console.log("SOMETHING WENT WRONG⚠️⚠️⚠️⚠️⚠️ USER USER");
+    }
+
+    return {
+      success: true,
+    };
+  }),
 });
