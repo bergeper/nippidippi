@@ -16,7 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import AutoModeIcon from "@mui/icons-material/AutoMode";
 import PersonIcon from "@mui/icons-material/Person";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
-
+import InfoIcon from "@mui/icons-material/Info";
 import HomeIcon from "@mui/icons-material/Home";
 import { useSession } from "next-auth/react";
 import { theme } from "~/styles/theme/theme";
@@ -136,6 +136,31 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                   </ListItemButton>
                 </Link>
               </ListItem>
+              <ListItem sx={{ p: 0.5 }}>
+                <Link
+                  id="about"
+                  href="/about"
+                  style={{ textDecoration: "none" }}
+                >
+                  <ListItemButton sx={{ p: 0.5 }}>
+                    <ListItemIcon
+                      sx={{
+                        display: "flex",
+                        minWidth: 0,
+                        mr: "auto",
+                        alignItems: "center",
+                        gap: 2,
+                      }}
+                    >
+                      <InfoIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="About"
+                      sx={{ p: 0.5, color: "black" }}
+                    />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
               {session && (
                 <ListItem sx={{ p: 0.5 }}>
                   <Link
@@ -170,19 +195,3 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
     </>
   );
 };
-
-/*
-<ListItemButton
-                sx={{
-                  ...listItemButtonStyle,
-                  backgroundColor: pathname.includes("dashboard")
-                    ? "#d3dce6"
-                    : theme.palette.common.white,
-                }}
-              >
-                <ListItemIcon sx={listItemIconStyle}>
-                  <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" sx={listItemTextStyle} />
-              </ListItemButton>
-*/

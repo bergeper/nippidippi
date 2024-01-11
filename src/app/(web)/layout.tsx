@@ -152,7 +152,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
         component="main"
         sx={{
           minWidth: 360,
-          minHeight: "666px",
+          minHeight: "90vh",
           backgroundImage: `${ImgOverlay}, url(${rainingChips.src})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -162,6 +162,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           alignItems: "center",
           [theme.breakpoints.down("sm")]: {
             flexDirection: "column",
+            minHeight: "666px",
           },
         }}
       >
