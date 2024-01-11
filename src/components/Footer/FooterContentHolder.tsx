@@ -2,7 +2,7 @@
 
 import { Box, Typography } from "@mui/material";
 import { theme } from "~/styles/theme/theme";
-import { FooterContact } from "./FooterContact";
+import { ContactInfo } from "../Info/ContactInfo";
 import { FooterLinks } from "./FooterLinks";
 
 export const FooterContentHolder = () => {
@@ -58,7 +58,7 @@ export const FooterContentHolder = () => {
             py: 2,
           }}
         >
-          <FooterContact />
+          <ContactInfo />
         </Box>
       </Box>
       <Box
