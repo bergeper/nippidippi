@@ -4,6 +4,8 @@ import { Box, Typography } from "@mui/material";
 import { theme } from "~/styles/theme/theme";
 import { ContactInfo } from "../Info/ContactInfo";
 import { FooterLinks } from "./FooterLinks";
+import np from "public/images/ni.png";
+import Image from "next/image";
 
 export const FooterContentHolder = () => {
   return (
@@ -26,7 +28,13 @@ export const FooterContentHolder = () => {
           py: 2,
         }}
       >
-        <Typography sx={{ fontWeight: "bold" }}>NippiDIPPI</Typography>
+        <Image
+          src={np.src}
+          width={40}
+          height={40}
+          style={{ height: "auto" }}
+          alt="NippiDippi"
+        />
       </Box>
       <Box
         sx={{
