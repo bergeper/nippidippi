@@ -83,6 +83,7 @@ export const RouletteBoard = () => {
 
   return (
     <>
+      <Box ref={target} />
       <RouletteBoardTitle />
       <Box
         sx={{
@@ -101,7 +102,6 @@ export const RouletteBoard = () => {
           alt="Spinner Wheel Frame"
           style={{ position: "absolute" }}
           onClick={getCombo}
-          ref={target}
         />
       </Box>
 

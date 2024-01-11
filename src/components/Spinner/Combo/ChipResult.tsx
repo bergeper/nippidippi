@@ -64,6 +64,7 @@ export const ChipResult = ({ chip }: Props) => {
           },
           [theme.breakpoints.up("sm")]: {
             width: "240px",
+            top: 30,
             left: "2%",
             transform: "translateY(+10%)",
           },
