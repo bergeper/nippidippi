@@ -63,6 +63,7 @@ export const DipResult = ({ dip }: Props) => {
             zIndex: 11,
           },
           [theme.breakpoints.up("sm")]: {
+            top: 45,
             width: "240px",
             right: "2%",
             transform: "translateY(+10%)",
