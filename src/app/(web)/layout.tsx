@@ -152,7 +152,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
         component="main"
         sx={{
           minWidth: 360,
-          maxHeight: "2000px",
+          minHeight: "666px",
           backgroundImage: `${ImgOverlay}, url(${rainingChips.src})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

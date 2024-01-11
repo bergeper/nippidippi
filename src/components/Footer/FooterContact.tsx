@@ -22,9 +22,8 @@ export const FooterContact = () => {
         }}
       >
         <Link
-          id="footer-menu-about"
+          id="footer-menu-email"
           color="inherit"
-          href="/about"
           style={{ textDecoration: "none" }}
         >
           <ListItemButton sx={{ p: 1, pl: 2 }}>
@@ -56,9 +55,8 @@ export const FooterContact = () => {
         }}
       >
         <Link
-          id="footer-menu-about"
+          id="footer-menu-phone"
           color="inherit"
-          href="/about"
           style={{ textDecoration: "none" }}
         >
           <ListItemButton sx={{ p: 1, pl: 2 }}>

@@ -93,6 +93,10 @@ export const combinationRouter = router({
       orderBy: {
         rating: Prisma.SortOrder.desc,
       },
+      include: {
+        chip: true,
+        dip: true,
+      },
     });
 
     return combos;
