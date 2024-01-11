@@ -50,7 +50,7 @@ export const Toplist = ({ combos }: Props) => {
             },
             [theme.breakpoints.up("md")]: {
               width: "490px",
-              height: "490px",
+              height: "550px",
               m: 5,
             },
           }}

@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { type PropsWithChildren } from "react";
 import { useSession } from "next-auth/react";
 import { NavMenu } from "~/components/Menu/NavMenu";
@@ -20,6 +20,7 @@ import Link from "next/link";
 import rainingChips from "public/images/rainingChips.jpg";
 import { theme } from "~/styles/theme/theme";
 import { FooterContentHolder } from "~/components/Footer/FooterContentHolder";
+import Loading from "./loading";
 
 export default function HomeLayout({ children }: PropsWithChildren) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -41,7 +42,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
     <>
       <AppBar
         color="inherit"
-        position="static"
+        position="fixed"
         sx={{
           background: "#EEE3AC",
         }}
@@ -152,7 +153,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
         component="main"
         sx={{
           minWidth: 360,
-          minHeight: "666px",
+          minHeight: "90vh",
           backgroundImage: `${ImgOverlay}, url(${rainingChips.src})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -160,12 +161,15 @@ export default function HomeLayout({ children }: PropsWithChildren) {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          pt: 5,
           [theme.breakpoints.down("sm")]: {
+            pt: 7,
             flexDirection: "column",
+            minHeight: "666px",
           },
         }}
       >
-        {children}
+        <Suspense fallback={<Loading />}>{children}</Suspense>
       </Box>
       <FooterContentHolder />
     </>
