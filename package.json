@@ -12,7 +12,8 @@
     "migrate": "prisma migrate dev",
     "generate": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -48,6 +49,7 @@
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
+    "cypress": "^13.6.2",
     "eslint": "^8.54.0",
     "prisma": "^5.6.0",
     "typescript": "^5.1.6",
