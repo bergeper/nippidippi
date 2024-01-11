@@ -27,12 +27,7 @@ import RouletteWheel from "public/images/RouletteWheel.png";
 
 export default function Loading() {
   return (
-    <Backdrop
-      sx={{
-        color: "#fff",
-      }}
-      open={true}
-    >
+    <Backdrop open={true}>
       <Spinner isSpinning={true}>
         <Image
           src={RouletteWheel}
