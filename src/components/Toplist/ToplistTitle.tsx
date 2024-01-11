@@ -17,7 +17,7 @@ export const ToplistTitle = () => {
           pt: 2,
           mb: 2,
           [theme.breakpoints.up("sm")]: {
-            px: 4,
+            p: 4,
             my: 10,
             height: "auto",
             alignContent: "center",
