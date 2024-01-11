@@ -4,6 +4,7 @@ import { theme } from "~/styles/theme/theme";
 export const RouletteBoardTitle = () => {
   return (
     <Box
+      data-testid="combo-title"
       component="section"
       sx={{
         width: "100%",

@@ -102,6 +102,7 @@ export const RouletteBoard = () => {
           alt="Spinner Wheel Frame"
           style={{ position: "absolute" }}
           onClick={getCombo}
+          data-testid="get-result"
         />
       </Box>
 
@@ -126,6 +127,7 @@ export const RouletteBoard = () => {
           <>
             <ComboTitle comboName={combo.name} />
             <Box
+              data-testid="result-container"
               sx={{
                 display: "flex",
                 width: "330px",

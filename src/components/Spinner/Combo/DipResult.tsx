@@ -37,6 +37,7 @@ export const DipResult = ({ dip }: Props) => {
   const splittedText = dip.flavor.split("&");
   return (
     <Grow
+      data-testid="dip-result"
       in={!!dip}
       mountOnEnter
       unmountOnExit
