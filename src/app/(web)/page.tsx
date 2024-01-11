@@ -67,7 +67,13 @@ export default function HomePage() {
             position: "relative",
           }}
         >
-          <Button color="inherit" sx={buttonHomePageStyle} href="/spinner">
+          <Button
+            id="to-spinner"
+            cy-test-id="cy-to-spinner"
+            color="inherit"
+            sx={buttonHomePageStyle}
+            href="/spinner"
+          >
             NippiDippi Wheel
           </Button>
           <Image
