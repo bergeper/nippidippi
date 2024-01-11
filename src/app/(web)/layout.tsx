@@ -18,9 +18,11 @@ import { useSession } from "next-auth/react";
 import { NavMenu } from "~/components/Menu/NavMenu";
 import Link from "next/link";
 import rainingChips from "public/images/rainingChips.jpg";
+import np from "public/images/ni.png";
 import { theme } from "~/styles/theme/theme";
 import { FooterContentHolder } from "~/components/Footer/FooterContentHolder";
 import Loading from "./loading";
+import Image from "next/image";
 
 export default function HomeLayout({ children }: PropsWithChildren) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -60,13 +62,46 @@ export default function HomeLayout({ children }: PropsWithChildren) {
             <MenuIcon />
           </IconButton>
 
-          <Typography
-            variant="h6"
+          <Box
             component="div"
-            sx={{ flexGrow: 1, textAlign: "center" }}
+            sx={{
+              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "auto",
+            }}
           >
-            NippiDippi
-          </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                flexGrow: 1,
+                width: "auto",
+                fontWeight: "bold",
+                // pr: 1,
+              }}
+            >
+              Nippi
+            </Typography>
+            <Image
+              src={np.src}
+              width={40}
+              height={40}
+              style={{ height: "auto" }}
+              alt="NippiDippi"
+            />
+            <Typography
+              variant="h6"
+              sx={{
+                flexGrow: 1,
+                width: "auto",
+                fontWeight: "bold",
+                // pl: 1,
+              }}
+            >
+              Dippi
+            </Typography>
+          </Box>
 
           <Box>
             <IconButton
