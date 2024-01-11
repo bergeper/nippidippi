@@ -73,6 +73,7 @@ export const ToplistCombo = ({ combo, toplistNum }: Props) => {
           alignItems="center"
         >
           <Image
+            cy-test-id="chip-image"
             src={combo.chip.imgUrl}
             width={chipSize}
             height={83.333}
@@ -97,6 +98,7 @@ export const ToplistCombo = ({ combo, toplistNum }: Props) => {
         >
           {combo.dip.imgUrl !== "/none" ? (
             <Image
+              cy-test-id="dip-image"
               src={combo.dip.imgUrl}
               width={dipSize}
               height={83.333}
