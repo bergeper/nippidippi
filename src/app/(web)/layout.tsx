@@ -82,14 +82,16 @@ export default function HomeLayout({ children }: PropsWithChildren) {
             <MenuIcon />
           </IconButton>
 
-          <Box
-            component="div"
-            sx={{
+          <Link
+            href="/"
+            style={{
               textAlign: "center",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               width: "auto",
+              color: "black",
+              textDecoration: "none",
             }}
           >
             <Typography
@@ -121,7 +123,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
             >
               Dippi
             </Typography>
-          </Box>
+          </Link>
 
           <Box>
             <IconButton
