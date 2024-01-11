@@ -11,7 +11,7 @@ describe("RouletteBoard Component", () => {
       "/api/trpc/combination.getRandomCombo?batch=1&input=%7B%7D"
     ).as("getCombo");
 
-    cy.get('img[data-testid="get-result"]').click();
+    cy.get('img[cy-test-id="get-result"]').click();
 
     // API
     cy.wait("@getCombo").then((interception) => {
@@ -43,8 +43,8 @@ describe("RouletteBoard Component", () => {
       }
     });
 
-    cy.get('[data-testid="combo-title"]').should("be.visible");
-    cy.get('[data-testid="dip-result"]').should("be.visible");
-    cy.get('[data-testid="chip-result"]').should("be.visible");
+    cy.get('[cy-test-id="combo-title"]').should("be.visible");
+    cy.get('[cy-test-id="dip-result"]').should("be.visible");
+    cy.get('[cy-test-id="chip-result"]').should("be.visible");
   });
 });
