@@ -16,7 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import AutoModeIcon from "@mui/icons-material/AutoMode";
 import PersonIcon from "@mui/icons-material/Person";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
-
+import InfoIcon from "@mui/icons-material/Info";
 import HomeIcon from "@mui/icons-material/Home";
 import { useSession } from "next-auth/react";
 import { theme } from "~/styles/theme/theme";
@@ -131,6 +131,31 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                     </ListItemIcon>
                     <ListItemText
                       primary="Toplist"
+                      sx={{ p: 0.5, color: "black" }}
+                    />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+              <ListItem sx={{ p: 0.5 }}>
+                <Link
+                  id="about"
+                  href="/about"
+                  style={{ textDecoration: "none" }}
+                >
+                  <ListItemButton sx={{ p: 0.5 }}>
+                    <ListItemIcon
+                      sx={{
+                        display: "flex",
+                        minWidth: 0,
+                        mr: "auto",
+                        alignItems: "center",
+                        gap: 2,
+                      }}
+                    >
+                      <InfoIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="About"
                       sx={{ p: 0.5, color: "black" }}
                     />
                   </ListItemButton>
