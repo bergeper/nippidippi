@@ -55,7 +55,7 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
             onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
           >
-            <List id="main-menu">
+            <List id="main-menu" sx={{ width: "100%" }}>
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <IconButton
                   aria-label="close drawer"
@@ -66,7 +66,11 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                 </IconButton>
               </Box>
               <ListItem sx={{ p: 0.5 }}>
-                <Link id="home" href="/" style={{ textDecoration: "none" }}>
+                <Link
+                  id="home"
+                  href="/"
+                  style={{ textDecoration: "none", width: "100%" }}
+                >
                   <ListItemButton sx={{ p: 0.5 }}>
                     <ListItemIcon
                       sx={{
@@ -90,7 +94,7 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                 <Link
                   id="spinner"
                   href="/spinner"
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none", width: "100%" }}
                 >
                   <ListItemButton sx={{ p: 0.5 }}>
                     <ListItemIcon
@@ -115,7 +119,7 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                 <Link
                   id="toplist"
                   href="/toplist"
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none", width: "100%" }}
                 >
                   <ListItemButton sx={{ p: 0.5 }}>
                     <ListItemIcon
@@ -140,7 +144,7 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                 <Link
                   id="about"
                   href="/about"
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none", width: "100%" }}
                 >
                   <ListItemButton sx={{ p: 0.5 }}>
                     <ListItemIcon
@@ -166,7 +170,7 @@ export const NavMenu = ({ isOpen, closeMenu }: Props) => {
                   <Link
                     id="my-pages"
                     href="/my-pages"
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none", width: "100%" }}
                   >
                     <ListItemButton sx={{ p: 0.5 }}>
                       <ListItemIcon
