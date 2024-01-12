@@ -8,6 +8,7 @@ import {
   Button,
   Typography,
 } from "@mui/material";
+import { signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { type Dispatch, type SetStateAction } from "react";
 import { trpcApi } from "~/server/trpc/proxyTRPC";
@@ -19,6 +20,7 @@ interface Props {
 }
 export const AcceptDeleteUser = ({ isOpen, isDialogOpen }: Props) => {
   const handleDelete = async () => {
+    void signOut();
     const response = await trpcApi.user.deleteUser.query();
     console.log(response);
     if (response) {
