@@ -87,8 +87,6 @@ export const combinationRouter = router({
     }
   }),
   getTopCombos: publicProcedure.query(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
     const combos = await db.combination.findMany({
       take: 10,
       orderBy: {
