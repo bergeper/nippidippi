@@ -66,7 +66,7 @@ This will push up to the server( Note: tables might be cleared of data )
   npm run db:push
 ```
 
-This will also change the tables and delete all the data that exits
+This will also change the tables and delete all the data that exists
 
 ```ps1
   npm run migrate
