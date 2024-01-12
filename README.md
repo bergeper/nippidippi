@@ -1,28 +1,105 @@
-# Create T3 App
+# NippiDippi
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Create delightful chip and dip combinations effortlessly with this web-based generator! Whether you're hosting a party or just craving a tasty snack, this tool suggests unique pairings of chips and dips to elevate your taste experience. Say goodbye to the same old choices and let the Chip and Dip Combo Generator(called NippiDippi Wheel) add a dash of excitement to your snack time. Make your gatherings unforgettable with perfectly matched flavor combinations.
 
-## What's next? How do I make an app with this?
+## Project Setup
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+To run the project you first need to fix a database using MySQL. I recommend using PlanetScale.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+Then you need to setup nextAuth and Discord Provider to make nextAuth-login work.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+You need to generate a secret for nextAuth, recommend using the following.
 
-## Learn More
+```ps1
+openssl rand -base64 32
+```
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+Afterwards you can update your env-file with the following lines:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+DATABASE_URL="Your database URL"
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+NEXTAUTH_SECRET="Your secret"<br />
+NEXTAUTH_URL="Your domain"
 
-## How do I deploy this?
+For the Discord Provider<br />
+[DiscordProvider](https://next-auth.js.org/providers/discord)<br />
+DISCORD_CLIENT_ID="Your discord client ID"<br />
+DISCORD_CLIENT_SECRET="Your discord secret"
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Now run the following commands in terminal to install dependencies:
+
+```ps1
+  npm i
+```
+
+### Commands
+
+Run Server
+
+```ps1
+  npm run dev
+```
+
+Run Prisma studio(db)
+
+```ps1
+  npm run studio
+```
+
+Run Types Check
+
+```ps1
+  npm run types
+```
+
+If changes are made in the Prisma schema.
+
+```ps1
+  npm run generate
+```
+
+Run either:
+
+This will push up to the server( Note: tables might be cleared of data )
+
+```ps1
+  npm run db:push
+```
+
+This will also change the tables and delete all the data that exits
+
+```ps1
+  npm run migrate
+```
+
+Eslint
+
+```ps1
+  npm run lint
+```
+
+Build
+
+```ps1
+  npm run build
+```
+
+### Technologies
+
+![Vercel](https://img.shields.io/badge/Vercel-000000.svg?style=for-the-badge&logo=Vercel&logoColor=white)
+
+![NodeJS](https://img.shields.io/badge/Node.js-339933.svg?style=for-the-badge&logo=nodedotjs&logoColor=white)
+
+![NextJS](https://img.shields.io/badge/Next.js-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white)
+
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white)
+
+![Mui](https://img.shields.io/badge/MUI-007FFF.svg?style=for-the-badge&logo=MUI&logoColor=white)
+
+![Cypress](https://img.shields.io/badge/Cypress-69D3A7.svg?style=for-the-badge&logo=Cypress&logoColor=white)
+
+![Prisma](https://img.shields.io/badge/Prisma-2D3748.svg?style=for-the-badge&logo=Prisma&logoColor=white)
+
+![TRPC](https://img.shields.io/badge/tRPC-2596BE.svg?style=for-the-badge&logo=tRPC&logoColor=white)
+
+![Eslint](https://img.shields.io/badge/ESLint-4B32C3.svg?style=for-the-badge&logo=ESLint&logoColor=white)
