@@ -22,7 +22,7 @@ export default async function SettingsPage() {
 
           height: "100%",
           width: "100%",
-          mt: 2,
+          mt: 5,
         }}
       >
         <Box

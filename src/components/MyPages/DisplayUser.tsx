@@ -18,7 +18,8 @@ export const DisplayUser = ({ user }: Props) => {
         maxWidth: 300,
         background: theme.palette.custom.custom,
         p: 2.5,
-        m: 2,
+        mx: 2,
+        mb: 2,
       }}
     >
       <CardContent

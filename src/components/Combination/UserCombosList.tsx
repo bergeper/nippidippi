@@ -40,7 +40,7 @@ export const UserCombosList = ({ combos }: Props) => {
             justifyContent: "center",
             width: "40%",
             borderRadius: "4px",
-            mt: 2,
+            mt: 5,
             p: 2,
           },
         }}
