@@ -58,17 +58,31 @@ export const UserCombosList = ({ combos }: Props) => {
         </Typography>
       </Box>
       <Box
-        sx={{ display: "flex", width: "100%", flexDirection: "column", mt: 4 }}
+        sx={{
+          display: "flex",
+          width: "100%",
+          flexDirection: "column",
+          alignItems: "center",
+          mt: 4,
+        }}
       >
         <TableContainer
           sx={{
             display: "flex",
             justifyContent: "center",
+            overflow: "hidden",
+            width: "100%",
+            [theme.breakpoints.up("sm")]: {
+              width: "80%",
+            },
+            [theme.breakpoints.up("md")]: {
+              width: "60%",
+            },
           }}
         >
           <Table
             sx={{
-              maxWidth: 800,
+              width: "100%",
               background: theme.palette.custom.custom,
               borderRadius: "4px",
             }}
@@ -76,14 +90,59 @@ export const UserCombosList = ({ combos }: Props) => {
           >
             <TableHead>
               <TableRow>
-                <TableCell sx={{ fontWeight: "bold" }}>Combo</TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                <TableCell
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "0.8rem",
+                    px: 2,
+                    py: 2,
+                    [theme.breakpoints.up("sm")]: {
+                      fontSize: "1rem",
+                    },
+                  }}
+                >
+                  Combo
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "0.8rem",
+                    px: 1,
+                    py: 2,
+                    [theme.breakpoints.up("sm")]: {
+                      fontSize: "1rem",
+                    },
+                  }}
+                >
                   Chip
                 </TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                <TableCell
+                  align="center"
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "0.8rem",
+                    px: 1,
+                    py: 2,
+                    [theme.breakpoints.up("sm")]: {
+                      fontSize: "1rem",
+                    },
+                  }}
+                >
                   Dip
                 </TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                <TableCell
+                  align="center"
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "1rem",
+                    px: 1,
+                    py: 2,
+                    [theme.breakpoints.up("sm")]: {
+                      fontSize: "1rem",
+                    },
+                  }}
+                >
                   Rating
                 </TableCell>
               </TableRow>
@@ -99,21 +158,62 @@ export const UserCombosList = ({ combos }: Props) => {
                   <TableCell
                     component="th"
                     scope="row"
-                    sx={{ fontWeight: "bold" }}
+                    sx={{
+                      fontWeight: "bold",
+                      fontSize: "0.8rem",
+                      px: 2,
+                      py: 2,
+                      [theme.breakpoints.up("sm")]: {
+                        fontSize: "1rem",
+                      },
+                    }}
                   >
                     {row.name}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      fontSize: "0.8rem",
+                      px: 1,
+                      py: 2,
+                      [theme.breakpoints.up("sm")]: {
+                        fontSize: "1rem",
+                      },
+                    }}
+                  >
                     {row.chip.name}
                     <br />
                     {row.chip.flavor}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      fontSize: "0.8rem",
+                      px: 1,
+                      py: 2,
+                      [theme.breakpoints.up("sm")]: {
+                        fontSize: "1rem",
+                      },
+                    }}
+                  >
                     {row.dip.name}
                     <br />
                     {row.dip.flavor}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      fontSize: "0.8rem",
+                      px: 2,
+                      py: 2,
+                      [theme.breakpoints.up("sm")]: {
+                        fontSize: "1rem",
+                      },
+                    }}
+                  >
                     {row.rating}
                     <br />
                     <Button
