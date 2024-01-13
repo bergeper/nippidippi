@@ -33,35 +33,31 @@ export const Toplist = ({ combos }: Props) => {
         sx={{
           width: "100%",
           height: "1000px",
-          overflowY: "auto",
+          overflowY: "scroll",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           "&::-webkit-scrollbar": {
-            display: "none", // Hide the scrollbar for Webkit browsers
+            display: "none",
+            height: "6px",
+            width: "6px",
           },
-          // Scrollbar keep, if you want to show it
-          // "&::-webkit-scrollbar": {
-          //   height: "6px",
-          //   width: "6px",
-          //   "&-thumb": {
-          //     backgroundColor: "#000000",
-          //     borderRadius: "4px",
-          //   },
-          //   "&-track": {
-          //     backgroundColor: "#eee3ac",
-          //     borderRadius: "4px",
-          //   },
-          // },
-          // scrollbarWidth: "2px",
-          // scrollbarColor: "#000000 #eee3ac",
-
-          // [theme.breakpoints.up("md")]: {
-          //   width: "800px",
-          // },
-          // [theme.breakpoints.up("lg")]: {
-          //   width: "1150px",
-          // },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "#000000",
+            borderRadius: "4px",
+          },
+          "&::-webkit-scrollbar-track": {
+            backgroundColor: "#eee3ac",
+            borderRadius: "4px",
+          },
+          scrollbarWidth: "2px",
+          scrollbarColor: "#000000 #eee3ac",
+          [theme.breakpoints.up("sm")]: {
+            width: "auto",
+            "&::-webkit-scrollbar": {
+              display: "block",
+            },
+          },
         }}
       >
         {sortedCombos.map((c, i) => (
@@ -79,7 +75,7 @@ export const Toplist = ({ combos }: Props) => {
               background: theme.palette.custom.custom,
               [theme.breakpoints.up("sm")]: {
                 width: "390px",
-                height: "390px",
+                height: "450px",
               },
               [theme.breakpoints.up("md")]: {
                 width: "490px",
