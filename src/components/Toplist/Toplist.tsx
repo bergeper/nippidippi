@@ -21,43 +21,77 @@ export const Toplist = ({ combos }: Props) => {
         flexDirection: "column",
         alignItems: "center",
         [theme.breakpoints.up("sm")]: {
-          flexDirection: "row",
           justifyContent: "center",
-          flexWrap: "wrap",
-          width: "80%",
+          width: "100%",
         },
-        [theme.breakpoints.up("md")]: {
-          width: "80%",
+        [theme.breakpoints.up("lg")]: {
+          width: "100%",
         },
       }}
     >
-      {sortedCombos.map((c, i) => (
-        <Box
-          key={i}
-          component="article"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "center",
-            height: "auto",
-            width: "100%",
-            my: 4,
-            background: theme.palette.custom.custom,
-            [theme.breakpoints.up("sm")]: {
-              width: "390px",
-              height: "390px",
-            },
-            [theme.breakpoints.up("md")]: {
-              width: "490px",
-              height: "550px",
-              m: 5,
-            },
-          }}
-        >
-          <ToplistCombo combo={c} toplistNum={i + 1} />
-        </Box>
-      ))}
+      <Box
+        sx={{
+          width: "100%",
+          height: "1000px",
+          overflowY: "auto",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          "&::-webkit-scrollbar": {
+            display: "none", // Hide the scrollbar for Webkit browsers
+          },
+          // Scrollbar keep, if you want to show it
+          // "&::-webkit-scrollbar": {
+          //   height: "6px",
+          //   width: "6px",
+          //   "&-thumb": {
+          //     backgroundColor: "#000000",
+          //     borderRadius: "4px",
+          //   },
+          //   "&-track": {
+          //     backgroundColor: "#eee3ac",
+          //     borderRadius: "4px",
+          //   },
+          // },
+          // scrollbarWidth: "2px",
+          // scrollbarColor: "#000000 #eee3ac",
+
+          // [theme.breakpoints.up("md")]: {
+          //   width: "800px",
+          // },
+          // [theme.breakpoints.up("lg")]: {
+          //   width: "1150px",
+          // },
+        }}
+      >
+        {sortedCombos.map((c, i) => (
+          <Box
+            key={i}
+            component="article"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+              height: "auto",
+              width: "100%",
+              my: 4,
+              background: theme.palette.custom.custom,
+              [theme.breakpoints.up("sm")]: {
+                width: "390px",
+                height: "390px",
+              },
+              [theme.breakpoints.up("md")]: {
+                width: "490px",
+                height: "550px",
+                m: 5,
+              },
+            }}
+          >
+            <ToplistCombo combo={c} toplistNum={i + 1} />
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 };
