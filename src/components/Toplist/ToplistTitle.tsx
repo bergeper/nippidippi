@@ -10,12 +10,11 @@ export const ToplistTitle = () => {
         component="section"
         sx={{
           width: "100%",
-          // position: "absolute",
           display: "flex",
           flexDirection: "column",
           background: theme.palette.custom.custom,
           pt: 2,
-          mb: 2,
+
           [theme.breakpoints.up("sm")]: {
             p: 4,
             my: 10,
